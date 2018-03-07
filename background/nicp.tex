@@ -1,0 +1,119 @@
+\section{ICP \& NICP}
+\label{sec:bg_icp}
+\subsection{Iterative Closest Point}
+Iterative Closest Point (ICP) is an algorithm for aligning two different point clouds\cite{Besl1992}. In the situation of aligning point cloud A to point cloud B (named source and target correspondingly), the algorithm finds the transformation matrix that best matches source to target. The procedure can be briefly summarised as following steps:
+\begin{itemize}
+  \item For each point in source, finding corresponding closest point in target.
+  \item Calculating optimal rotation, translation and scaling transform to minimise difference (measured in point-to-point mean square error) between source and points generated in previous step.
+  \item Transform source using translation calculated in previous step to obtain new source.
+  \item Iterate until converge or special criteria satisfied.
+\end{itemize}
+\cite{Besl1992} shows ICP convergence can be proved that it will always converge to a local minimum.
+
+\subsection{Non-rigid Iterative Closest Point}
+Although ICP provided notable solution of aligning point clouds, it provides only rigid alignment that finding the best affine transform between source and target. For objects e.g. faces, ears, human poses, bottles and objects that are highly deformable, ICP is weak at model local changes and produces biased result due to non-rigid deformation.
+
+Non-rigid Iterative Closest Point (NICP) are an extension of ICP having enabling source to deform to fit target without breaking the property of guaranteed convergence\cite{Amberg2007}. A new term stiffness is introduced in order to constrain the degree of deformation. The fundamental idea is to incrementally apply ICP with stiffness where stiffness are scaling from high to low value at each iteration. To be specific, at initial iteration, the algorithm turned to apply rigid ICP on source, but source are allowed to deform in later iteration with increasingly extent. After converging, each point of source have one-to-one correspondence of points on target.
+
+In the situation of registering source $S$ to template $T$, $S$ are defined as mesh $(V,E)$ where $V$ are vertices and $E$ are edges with corresponding amount $n, m$. Template $T$ can have vertices only without defining edges. Registering $S$ to $T$ means computing a transformation matrix $X$ so that $V(X)$ is the projection of each points on target. Proper definition of $X$ are:
+\begin{equation}
+\label{eq:nicpX}
+X=[X_1,X_2,\dotsc,X_n]^T
+\end{equation}
+where $X_i$ is affine $3\times 4$ transformation matrix so $X$ are $4n\time 3$ matrix. The comprehensive cost function of optimising $X$ are:
+\begin{equation}
+E(X)=E_d(X)+\alpha E_s(X)+\beta E_l(X)
+\end{equation}
+where $E_d(X)$ is distance penalty term, $E_s(X)$ is stiffness penalty term and $E_l(X)$ is landmark penalty term. Definitions of each term are detailedly introduced in following sections \ref{sec:nicpdt}, \ref{sec:nicpst} and \ref{sec:nicplt}.
+
+\subsubsection{Distance Penalty Term}
+\label{sec:nicpdt}
+
+Distance between $S$ and $T$ are defined using Euclidean Distance. The distance penalty term and corresponding matrix form is defined as \cite{Amberg2007}:
+
+\begin{align}
+\label{eq:nicpdt}
+E_d(X) &= \sum_{i=1}^n{w_i || X_i v_i - u_i ||^2} 
+\\ &=
+\begin{Vmatrix}
+    (W \otimes I_3) 
+    \begin{pmatrix}
+        \begin{bmatrix}
+        X_1 &  &  \\  & \ddots &  \\ &  & X_n
+        \end{bmatrix}
+        \begin{bmatrix}
+        v_1 \\ \vdots \\ v_n
+        \end{bmatrix}
+        -
+        \begin{bmatrix}
+        u_1 \\ \vdots \\ u_n
+        \end{bmatrix}
+    \end{pmatrix}
+\end{Vmatrix}
+^2
+\end{align}
+
+where $v_i \in V$ are assumed having format $[x,y,z,1]^T$, $u_i \in T$ is corresponding closest point with same format of $v_i$, Euclidean distance between $v_i$ and $u_i$ is weighted by $w_i$. For matrix form, $W$ has form $\text{trace}(w_1,...,w_n)$ and performs Kronecker tensor product with an identity matrix of shape $3 \times 3$. 
+
+By defining $D = \text{trace}(v_1,\dotsc,v_n)$ and $U=[u_1,\dotsc,u_n]^T$, above equation can be further simplified as:
+\begin{equation}
+E_d(X) = ||W(DX-U)||^2_F
+\end{equation}
+
+\subsubsection{Stiffness Penalty Term}
+\label{sec:nicpst}
+
+Stiffness term is introduced to have constrain on deformation. In other word, stiffness maintains the neighbouring  correlation for each vertex. A significant deformation of one vertex can cause remarkable penalty on neighbouring vertices. Therefore source mesh cannot deform completely freely but with regularisation. The matrix form of stiffness penalty cost function defined as \cite{Amberg2007}:
+\begin{equation}
+E_s(X)=||(M \otimes G)X||^2_F
+\end{equation}
+where $M$ expresses the connectivity of vertices with $m \times n$ that each row $r$ represent an edge, for edge connecting vertices $(i,j)$, $M_{ri}=-1$ and $M_{rj}=1$. $G=\text{trace}(1,1,1,\gamma)$, where $\gamma$ used to weight skew and rotation part of deformation.
+
+\subsubsection{Landmark Penalty Term}
+\label{sec:nicplt}
+
+Landmark penalty term functioning similar as distance term. It can be assumed as a sparse version of distance term with exact landmark correspondence instead of looking up for closest points. Formal definition are \cite{Amberg2007}:
+\begin{equation}
+E_l(X)=||D_LX-U_L||^2_F
+\end{equation}
+where $D_L$ are rows from matrix $D$ that related to landmark points and similarly $U_L$ are of format $[l_1,\dotsc,l_l]^T$ with $l_i$ as landmark points.
+
+\cite{Amberg2007} shown landmarks term is optional. Although landmark term accelerated converge rate, NICP still produced desirable result without this term.
+
+\subsubsection{Comprehensive Cost Function}
+As each of penalty terms are defined in details above, the finalised cost function can be expressed:
+\begin{align}
+\label{eq:nicpfinal}
+E(X) &= 
+\begin{Vmatrix}
+    \begin{bmatrix}
+        \alpha M \otimes G \\ WD \\ \beta D_L
+    \end{bmatrix}
+    X- 
+    \begin{bmatrix}
+        0 \\ WU \\ U_L
+    \end{bmatrix}
+\end{Vmatrix}
+^2_F \\
+&= ||AX-B||^2_F,
+\end{align}
+where $X$ can be solved directly by setting the derivative of $E(X)$ to zero. So $X$ has a closed-form solution:
+\begin{equation}
+\label{eq:nicpx}
+X=(A^TA)^{-1}A^TB
+\end{equation}
+which simply is the product of pseudo-inverse of matrix $A$ and matrix $B$. Therefore in each step, the deformation can be found directly for fixed $\alpha$ and $\beta$. Since landmark term is optional, the final algorithm considers only varying stiffness weighting. Pseudo code are shown below \cite{Amberg2007}:
+\begin{algorithm}[h]
+\caption{Non-rigid Iterative Closest Point Algorithm}
+\label{alg:nicp}
+Initialise $X^0$ as identical transformation\;
+\For{$\alpha \in [\alpha^1,\dotsc,\alpha^p] \& \alpha_i > \alpha_{i+1}$}{
+    \While{$||X^j-X^{j-1}||^2_F > \varepsilon$}{
+        Calculate new source $S=(V(X^{j-1}),E)$\;
+        Find optimal $X^j$ between $S$ and $T$ using equation \ref{eq:nicpx}\;
+    }
+}
+Return $X$\;
+\end{algorithm}
+
+As Nonrigid ICP declared that it preserved convergence feature from ICP so the algorithm \ref{alg:nicp} also gauranteed termination. Detailed discussion convergence preservation can be found in \cite{Amberg2007}.

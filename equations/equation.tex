@@ -1,0 +1,21 @@
+\documentclass[border={5pt 5pt 5pt 5pt}]{standalone}
+  % left bottom right top .  warning: does not understand ex or em
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage{textcomp}
+\RequirePackage{charter}
+\RequirePackage[mdbch,ttscaled=true]{mathdesign}
+\usepackage{microtype}
+\usepackage{mathtools}
+
+\usepackage[english]{babel}
+
+\pagestyle{empty}
+
+\begin{document}
+	\begin{align}
+	    \operatorname*{arg\,min}_{\bm{u_n}(\bm{x}), \bm{v}}&=\alpha \int_{\Omega}\sum_{n=1}^F|\bm{d_n}(x+\bm{u_n}(x))-\bm{d_0}(x)\| dx  \label{eq:costfunc}\\
+	    &+ \beta \int_{\Omega}\sum_{n=1}^F\|\bm{u_n}(x)-\sum_{i=1}^R\bm{q_i}(n)\bm{v_i}(x)\|^2 dx \label{eq:lowrank}\\
+	    &+ \sum[\bm{TV}(Qv)]
+	\end{align}
+\end{document}

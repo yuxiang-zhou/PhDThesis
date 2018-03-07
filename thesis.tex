@@ -1,0 +1,71 @@
+
+\documentclass[a4paper,12pt,twoside]{report}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=3cm]{geometry}
+
+% multirow allows you to combine rows in columns
+\usepackage{multirow}
+% tabularx allows manual tweaking of column width
+\usepackage{tabularx}
+% longtable does better format for tables that span page
+\usepackage{longtable}
+\usepackage{titling}
+
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ------ New Package Here ------
+
+\usepackage{caption}
+\usepackage{dblfloatfix}
+\usepackage{subcaption}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{bm}
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks=true,bookmarks=true]{hyperref}
+\usepackage[parfill]{parskip}
+
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother
+
+\include{thesis.preamble}
+
+
+\begin{document}
+
+\title{\LARGE {\bf Statistical Deformable Models with Dense Shapes}\\
+ \vspace*{6mm}
+}
+
+\author{Yuxiang Zhou}
+\submitdate{June 2015}
+
+\normallinespacing
+\maketitle
+
+\preface
+\input{abstract/abstract}
+% \input{acknowledgements/acknowledgements}
+% \input{dedication/dedication}
+% \input{quotes/quotes}
+
+\body
+\input{introduction/introduction}
+\input{background/background}
+
+% body of thesis comes here
+\input{maincontent/implementation}
+\input{maincontent/evaluation}
+
+\input{conclusion/conclusion}
+
+\appendix
+% appendices come here
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{alpha}
+\bibliography{bibliography/bibliography}
+
+\end{document}

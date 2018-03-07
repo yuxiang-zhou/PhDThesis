@@ -1,0 +1,19 @@
+
+\chapter{Conclusion}
+\label{ch:conclusions}
+
+We proposed the first, to the best of our knowledge, methodology that can build a dense deformable model "in-the-wild". This methodology does not require a consistent set of landmarks, avoiding the tedious task of careful manual annotations. We have exploited state-of-the-art multi-frame optical flow methodologies to establish accurate and robust dense correspondences among shapes, when represented in a landmarks-free fashion. The experimental evaluations and comparisons revealed that dense AAMs that are built on top of our methodology achieve very good performance and can work effectively even in cases of objects that cannot have consistent landmarks.
+
+\section{Future Works}
+
+\subsubsection{(October, 2014 - December, 2015) Building Dense Deformable Model without Landmarks} 
+Manual annotation has been shown in previous sections that is extremely labor intensive, time consuming and easily biased. We have introduced curve annotations that significantly reduces annotation cost while maintaining the performance of building and fitting AAM models. Meanwhile, we build AAM with dense shape model, which is built by putting curve-annotated shapes in dense correspondence. We believe dense shape representation would reveal more nuanced structures.
+
+\subsubsection{(December, 2015 - December, 2016) Generalising Models for Articulated Objects}
+The next step is to extend and generalise previous dAAMs to articulated objects e.g. human body, which is hard to model with only one global dAAMs. We proposed to build dense deformable models on articulated objects by parts and to combine group of dAAMs.
+
+\subsubsection{(December, 2016 - December, 2017) Discovering Shapes without Annotation}
+Next objective would be discovering shapes from images without any landmarks. Recent research \cite{zhou2015flowweb, jia2014roml, jiang2009learning} proposed several algorithms for shape feature extraction, which our project could extend base on. By achieving that, constructing statistical deformable models can be fully automated.
+
+\subsubsection{(December, 2017 - June, 2018) Writing up Thesis}
+Writing up thesis with focus on dense statistical deformable models.
