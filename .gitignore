@@ -12,6 +12,8 @@
 *.cb2
 .*.lb
 Yuxiang_PhD_Thesis.pdf
+thesis.pdf
+*.zip
 
 ## Intermediate documents:
 *.dvi
