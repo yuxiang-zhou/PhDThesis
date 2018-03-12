@@ -64,7 +64,7 @@ This section provides some details regarding our network architecture used to pe
 
 In the stacked hourglass paper the best body pose estimation results have been achieved by using 8 hourglass networks stacked together. In our architecture, instead of 8, only 2 hourglasses are stacked. The first hourglass is used to regress to dense shape information while the second one takes as input the image and the privileged information and regresses to landmark locations. Regarding loss function, we used pixel-wise $\ell_1$ smooth loss for regressing to SVS signals that has continuous values.
 
-\begin{figure*}[t!]
+\begin{figure}[t!]
     \centering
 
     \newcommand{\flowhh}{0.275\columnwidth}
@@ -111,9 +111,9 @@ In the stacked hourglass paper the best body pose estimation results have been a
     
     \caption{TOP:Exemplar joints localization on MPII and LSP test set. BOT: Exemplar predictions of estimated dense whole body joints correspondence. Figure best viewed by zooming in.}
     \label{fig:qualitative}
-\end{figure*}
+\end{figure}
 
-\begin{table*}[t!]
+\begin{table}[t!]
 \small
 \begin{center}
 \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|}
@@ -132,8 +132,8 @@ Our Model                     & \textbf{98.4}  & \textbf{96.4}  & \textbf{92.0} 
 \end{center}
 \caption{Joints Localisation Accuracy on MPII dataset.}
 \label{tab:mpii}
-\end{table*}
-\begin{table*}[t!]
+\end{table}
+\begin{table}[t!]
 \small
 \begin{center}
 \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|}
@@ -151,7 +151,7 @@ Our Model& 95.8  & \textbf{95.8}  & \textbf{94.9}  & \textbf{92.3}  & \textbf{95
 \end{center}
 \caption{Joints Localisation Accuracy on LSP dataset.}
 \label{tab:lsp}
-\end{table*}
+\end{table}
 
 
 \section{Activity Detection}
@@ -262,13 +262,13 @@ DenseReg code and demonstrations are made available at \url{http://alpguler.com/
 
 
 
-\begin{figure*}[h!]
+\begin{figure}[h!]
     \begin{center}
        \includegraphics[width=1\linewidth]{resources/Human_Poses/denseregPami2}
     \end{center}
        \caption{ We introduce a fully convolutional neural network that regresses from the image to a ``canonical'', deformation-free parameterization of the shape surface, effectively yielding a dense 2D-to-3D surface correspondence field. The system is depicted for dense correspondence between template shapes of \textit{a):} human face \textit{b):} human body.}
     \label{fig:intro_human_pose}
-\end{figure*}
+\end{figure}
     
 
 Deep Convolutional Neural Networks CNNs \cite{lecun1998gradient}
@@ -412,12 +412,12 @@ In order to handle the complex geometry of the human shape, we manually partitio
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure*}[t]
+\begin{figure}[t]
     \centering
     \includegraphics[trim={5.2cm 20cm 3.7cm 4.5cm}, clip, width=0.95\linewidth ]{resources/Human_Poses/Flow}
     \caption{Proposed Quantized Regression Approach for the horizontal correspondence signal: The continuous  signal is regressed by first estimating a grossly quantized (or, discretized) function  through a classification branch. For each quantized value $\hat{q}^h$ we use a separate residual regression unit's prediction, $\hat{r}^h_{\hat{q}^h}$, effectively multiplexing the different residual predictions. These are added to the quantized prediction, yielding a smooth and accurate correspondence field. }
     \label{fig:Pipeline}
-\end{figure*}
+\end{figure}
 
 
 Having described how we establish our supervision signal, we now turn to the task of estimating it through a convolutional neural network (CNN). 
@@ -510,14 +510,14 @@ Different objects have different degrees of articulation. Hence, we have used di
 
 On the other hand because body is a highly articulated object, with each part having each own self-occlusion maps (i.e., a hand or a foot can be occluded with the rest of the body being visible), we created a UV map per part. In total we split the body in 25 parts, as visualized in in Fig. \ref{fig:IUV}, and we applied quantised regression for each of the UV maps of the 25 body regions (parts). Hence, for the human body the network takes as input the three RGB channels of the image and outputs 75 channels. That is, three channels for each of the 25 parts (one for the U coordinates of the part, one for the V coordinates of the part and one for tessellated coordinates). 
 
-\begin{figure*}[h!]
+\begin{figure}[h!]
 \begin{center}
     \includegraphics[width=0.49 \linewidth ]{resources/Human_Poses/PoseReg_Frontpage4-2}
     \includegraphics[width=0.49 \linewidth ]{resources/Human_Poses/PoseReg_Frontpage5-2}
 \end{center}
     \caption{DenseReg cascade architecture for joint articulated pose estimation (body to the left, face to the right) and dense shape regression, wheredense correspondence supervision is obtained 3D Morphable Model fitting. Losses are shown in red. }
 \label{fig:cascadeBody}
-\end{figure*}
+\end{figure}
 
 \subsection{A DenseReg Cascade for end-to-end dense shape regression and articulated pose estimation}
 \label{sec: densereg_cascade}
@@ -634,7 +634,7 @@ Average          & \textbf{71.96} & 68.58\\
 \captionsetup[subfigure]{labelformat=empty}
 
 
-\begin{figure*}[h]
+\begin{figure}[h]
 \centering
 
 \includegraphics[width=0.13775\textwidth]{resources/Human_Poses/results/1/I}
@@ -672,7 +672,7 @@ Average          & \textbf{71.96} & 68.58\\
 \caption{Qualitative Results. Ground-truth and estimated deformation-free coordinates and  landmarks obtained from DenseReg and DenseReg+MDM are presented. Estimated landmarks(blue), ground-truth(green), lines between estimated and ground-truth landmarks(red).}
 \label{fig:qualitative}
 
-\end{figure*}
+\end{figure}
 
 \subsection{Landmark Localization on Static Images}
 \label{sec:exp_landmark_localization}
@@ -741,7 +741,7 @@ DenseReg                                & 0.3605 & 10.83 \\
 \label{sec:exp_deformable_tracking}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table*}[h]
+\begin{table}[h]
 \centering
 \scalebox{0.9}{
 \begin{tabular}{|l|c|c|}
@@ -761,7 +761,7 @@ DenseReg                                           & 0.4320 & 8.1   \\
  }
 \caption{Deformable tracking results against the state-of-the-art on the 300VW testing dataset using 68 points. Accuracy is reported as AUC and the Failure Rate.}
 \label{tab:300vw}
-\end{table*}
+\end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 For the challenging task of deformable face tracking on lengthy videos, we employ the testing database of the 300VW challenge~\cite{300VW,chrysos2015offline} - the only existing benchmark for deformable tracking ``in-the-wild''. The benchmark consists of $114$ videos ($\sim 218k$ frames in total) and includes videos captured in totally arbitrary conditions (severe occlusions and extreme illuminations).
@@ -783,7 +783,7 @@ Table~\ref{tab:300vw} reports the AUC and Failure Rate measures. DenseReg + Casc
 \label{sec:exp_human}
 
 
-\begin{figure*}[t!]
+\begin{figure}[t!]
     \centering
     \newcommand{\flowh}{0.28\columnwidth}
     \includegraphics[height=\flowh]{resources/Human_Poses/pose/qualitative/pred-1}
@@ -851,8 +851,9 @@ Table~\ref{tab:300vw} reports the AUC and Failure Rate measures. DenseReg + Casc
     
     \caption{Examplar joints localisations on MPII and LSP test set. \textit{TOP 2 Rows}: Predictions of challenging poses in MPII and LSP test set. \textit{Bottom 3 row}: Examplar predictions of Landmarks, together with estimated dense correspondence IUV outputs are shown at each row correspondingly. Figure best viewed by zooming in.}
     \label{fig:qualitative_pose}
-\end{figure*}
-\begin{table*}[t!]
+\end{figure}
+
+\begin{table}[t!]
 \small
 \begin{center}
 \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|}
@@ -872,8 +873,9 @@ DenseReg Cascade & \textbf{98.5}  & \textbf{96.4}  & \textbf{92.1}  & \textbf{88
 \end{center}
 \caption{Joints Localisation Accuracy on MPII dataset.}
 \label{tab:mpii}
-\end{table*}
-\begin{table*}[t!]
+\end{table}
+
+\begin{table}[t!]
 \small
 \begin{center}
 \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|}
@@ -892,7 +894,7 @@ DenseReg Cascade& 94.7  & \textbf{93.4}  & \textbf{90.2}  & \textbf{88.2}  & 91.
 \end{center}
 \caption{Joints Localisation Accuracy on LSP dataset.}
 \label{tab:lsp}
-\end{table*}
+\end{table}
 
 Since there are no dense correspondence results between a 3D human model and image pixels in literature, we demonstrate the performance of our system through visual results from our test-set partition of the UP dataset in Fig.\ref{fig:DenseReg_Human}. In order to provide quantitative experimental results in the following we evaluate DenseReg cascade architecture for the problem of articulated body pose estimation. 
 

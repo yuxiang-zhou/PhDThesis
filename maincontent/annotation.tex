@@ -231,12 +231,12 @@ In summary, the contributions of this paper are:
 %employed \cite{?}.
 
 
-\begin{figure*}[t!]
+\begin{figure}[t!]
     \centering
         \includegraphics[width=\textwidth]{resources/Annotation_Correction/architecture3}
     \caption{Schematic description of the proposed pipeline. Figure best viewed by zooming in.}
     \label{fig:archi}
-\end{figure*}
+\end{figure}
 
 \section{Constructing Deformable Models with Shape Flow}
 
@@ -558,7 +558,7 @@ We evaluate the performance of the proposed methodology for the task of human bo
     \label{fig:variance}
 \end{figure}
 
-\begin{figure*}[!t]
+\begin{figure}[!t]
     \newcommand{\fh}{0.24\columnwidth}
     \centering
     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_1}
@@ -594,9 +594,9 @@ We evaluate the performance of the proposed methodology for the task of human bo
     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_18}
     \caption{Demonstration of annotation correction using our method for the experiment of Section \ref{exp:qualitative}. \emph{Red} dots refer to officially provided landmarks, and \emph{green} dots are corrected position.}
     \label{fig:qualitative}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}[!t]
+\begin{figure}[!t]
     \newcommand{\ofh}{0.24\columnwidth}
     \centering
     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/20.eps}
@@ -645,7 +645,7 @@ We evaluate the performance of the proposed methodology for the task of human bo
     \caption{Demonstration of outline fitting of patch-based AAM on arms.}
     \label{fig:outline_fitting}
     \vspace{-5pt}
-\end{figure*}
+\end{figure}
 
 
 
@@ -698,7 +698,7 @@ In order to compare with current state-of-the-art on BBC Pose, we used the same 
 In the same experiment we prove that it is more advantageous to train a deformable model using the outline landmarks rather than the skeleton points. This is done by building a patch-based AAM on the same training data and with identical settings using both annotation schemes. As it can be seen from the  CED curves of Figure~\ref{fig:hand_benchmark}, our model trained on outline landmarks (Outline PAAM) notable outperforms the skeleton-based model for both wrist and elbow. We believe that this is a remarkable result, which indicates that out proposed outline mark-up can lead to a significant improvement of current state-of-the-art techniques.
 
 
-% \begin{figure*}[!t]
+% \begin{figure}[!t]
 %     \newcommand{\fh}{0.24\columnwidth}
 %     \centering
 %     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_1}
@@ -719,9 +719,9 @@ In the same experiment we prove that it is more advantageous to train a deformab
 %     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_18}
 %     \caption{Demonstration of annotation correction using our method for experiment \ref{exp:qualitative}. \emph{Red} dots refer to officially provided landmarks, and \emph{green} dots are corrected position.}
 %     \label{fig:qualitative}
-% \end{figure*}
+% \end{figure}
 
-% \begin{figure*}[!t]
+% \begin{figure}[!t]
 %     \newcommand{\ofh}{0.24\columnwidth}
 %     \centering
 %     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/20.eps}
@@ -749,7 +749,7 @@ In the same experiment we prove that it is more advantageous to train a deformab
 %     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/39.eps}
 %     \caption{Demonstration of outline fitting of patch-based AAM on arms.}
 %     \label{fig:outline_fitting}
-% \end{figure*}
+% \end{figure}
 
 \subsection{Annotation Correction}
 \label{exp:qualitative}
@@ -802,12 +802,12 @@ By applying our outline patch-based AAM on the aforementioned databases, we mana
 Learning and fitting statistical deformable models (SDMs) is one of the most important areas in computer vision. Generally, in order to train a SDM, a set of predefined correspondences are required. In some objects, such as human face, semantically meaningful correspondences can be found, but require laborious manual annotations; on other objects it is very difficult, or even impossible. In this paper, we propose one of the first comprehensive procedures for establishing correspondences (that do not necessarily correspond to semantically meaningful object landmarks) in arbitrary objects with minimal amount of human annotation. We apply the proposed approach for the construction of the first, to the best of our knowledge, highly-descriptive SDM for the human arm. 
 
 \section{Supplementary}
-\begin{figure*}[!b]
+\begin{figure}[!b]
 \centering
 \includegraphics[width=\textwidth]{resources/Annotation_Correction/Suplementory_Meterial/Models/models}
 \caption{Principal components of dAAMs built on ears (top) and faces (bottom). The mean (middle columns) as well as the first five principal components are visualised for both shape (left) and appearance (right). $\pm 3$ times the variance of the corresponding component is used in each case.}
 \label{fig:pcamodel}
-\end{figure*}
+\end{figure}
 
 
 %%%%%%%%% Supplementory
@@ -882,7 +882,7 @@ Figure \ref{fig:rc_face} evaluates the dense shape reconstruction ability of the
 
 
 
-\begin{figure*}[!t]
+\begin{figure}[!t]
     \newcommand{\ofh}{0.24\columnwidth}
     \centering
     \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0001.eps}
@@ -972,7 +972,7 @@ Figure \ref{fig:rc_face} evaluates the dense shape reconstruction ability of the
     \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0044.eps}
     \caption{Demonstration of outline fitting of patch-based AAM on arms. Images are cropped to arms only for better visualization.}
     \label{fig:paam_fittingresults}
-\end{figure*}
+\end{figure}
 
 
 \subsection{Dense Fitting Visualizations}
@@ -1019,7 +1019,7 @@ In this section, we present additional visualisations and evaluations for the pa
 \label{fig:sparsesample}
 \end{figure}
 
-\begin{table*}[t!]
+\begin{table}[t!]
     \centering
     \begin{tabular}{|l|c|c|c||c|c|c|}
         \hline
@@ -1039,7 +1039,7 @@ In this section, we present additional visualisations and evaluations for the pa
     \end{tabular}
     \caption{Fitting statistics on BBC Pose database for experiment 4.2 in main paper.}
     \label{tab:hand_benchmark}
-\end{table*}
+\end{table}
 
 As mentioned in the main paper (Section 3 - Step 4), in order to train a PAAM, we subsample the densified training shapes to only consider points on the object's outline. Some examples of this procedure are depicted in Figure~\ref{fig:sparsesample}. We manually annotate sparse outline points only on the reference shape. Then all other training shapes are subsampled automatically exploiting the dense correspondences that are established with our shape flow estimation. We observe that the automatic subsampling seems plausible, which is attributed to the accurate estimations of dense correspondences.
 
