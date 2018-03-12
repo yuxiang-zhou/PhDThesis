@@ -1,4 +1,5 @@
 pdflatex --interaction=nonstopmode thesis.tex
 pdflatex --interaction=nonstopmode thesis.tex
 bibtex thesis
-pdflatex --interaction=nonstopmode thesis.tex
+echo "--------------Attention!--------------"
+pdflatex --interaction=nonstopmode thesis.tex 2>&1 | grep ".*TeX.*[Warning|warning|Error|error]"
