@@ -148,23 +148,20 @@
 \usepackage{bm}
 \usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks=true,bookmarks=true]{hyperref}
 \usepackage[parfill]{parskip}
+\usepackage{afterpage}
 
 \makeatletter
 \newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
 \newcommand\eg{e.g. }
 \newcommand\ie{e.g. }
+
 \newenvironment{acknowledgement}%       New acknowledgement environment
     {\large\bfseries Acknowledgement%
     \par\medskip\normalfont\normalsize}%
     {}%
 \makeatother
 
-\usepackage{times}
-\usepackage{epsfig}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
-
+\def\deltap{{\bm{\Delta p}}}
 
 % --------Settings-------------------------------------
 \setlength{\belowcaptionskip}{-5pt}
