@@ -1,4 +1,4 @@
-\chapter{Annotation Correction and Building Deformable Models without landmarks}
+\chapter{Dense Annotation and Deformable Models without landmarks}
 
 % Building and training deformable models of objects (e.g. faces, ears, bodies, bottles, vehicles etc.) has recently been widely researched for object detection, part localisation, fitting, recognition and tracking using manual annotated data. Shapes and appearances of majority of objects vary significantly from object instance. To illustrate, ears have complicated inner structures (e.g. helix, crus antihelicis, scapha, tragus, lobe etc.) which differs remarkably between ears and highly sensitive to intensity changes. Recently, we have witnessed a great progress in object detection, alignment and recognition.
 
@@ -67,11 +67,11 @@
 \setlength{\tabcolsep}{1pt}
 \begin{figure}[t!]
         \begin{tabular}{ccc}
-        \includegraphics[height=.65\columnwidth]{resources/MotivativeAnnotation/MPII}
+        \includegraphics[height=.65\columnwidth]{resources/Annotation_Correction/MotivativeAnnotation/MPII}
         &
-        \includegraphics[height=.65\columnwidth]{resources/MotivativeAnnotation/FashionPose}
+        \includegraphics[height=.65\columnwidth]{resources/Annotation_Correction/MotivativeAnnotation/FashionPose}
         &
-        \includegraphics[trim=50 0 50 0,clip,height=.65\columnwidth]{resources/MotivativeAnnotation/FLIC}
+        \includegraphics[trim=50 0 50 0,clip,height=.65\columnwidth]{resources/Annotation_Correction/MotivativeAnnotation/FLIC}
         \\
         (a) MPII
         &
@@ -85,39 +85,39 @@
 \begin{figure}[t!]
     \centering
     \begin{subfigure}[b]{0.065\textwidth}
-            \includegraphics[height=2.55cm]{resources/Fig_Intro/intro_2_0}
+            \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_2_0}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.065\textwidth}
-            \includegraphics[height=2.55cm]{resources/Fig_Intro/intro_2_1}
+            \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_2_1}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.065\textwidth}
-            \includegraphics[height=2.55cm]{resources/Fig_Intro/intro_2_2}
+            \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_2_2}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.085\textwidth}
-            \includegraphics[height=2.55cm]{resources/Fig_Intro/intro_1_0}
+            \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_1_0}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.085\textwidth}
-            \includegraphics[height=2.55cm]{resources/Fig_Intro/intro_1_1}
+            \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_1_1}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.085\textwidth}
-            \includegraphics[height=2.55cm]{resources/Fig_Intro/intro_1_2}
+            \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_1_2}
     \end{subfigure}
     \\
     \begin{subfigure}[b]{0.156\textwidth}
-            \includegraphics[height=2.8cm]{resources/Fig_Intro/intro_0_0}
+            \includegraphics[height=2.8cm]{resources/Annotation_Correction/Fig_Intro/intro_0_0}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.156\textwidth}
-            \includegraphics[height=2.8cm]{resources/Fig_Intro/intro_0_1}
+            \includegraphics[height=2.8cm]{resources/Annotation_Correction/Fig_Intro/intro_0_1}
     \end{subfigure}
   	\hfill
     \begin{subfigure}[b]{0.156\textwidth}
-            \includegraphics[height=2.8cm]{resources/Fig_Intro/intro_0_2}
+            \includegraphics[height=2.8cm]{resources/Annotation_Correction/Fig_Intro/intro_0_2}
     \end{subfigure}
     \caption{Comparison of the standard landmark annotation (\emph{red} dots) with the curve annotation (\emph{blue} lines) on arms, ears and faces. It is evident that the curve annotations surpass the inevitable inconsistency of sparse annotations.}
     \label{fig:intro}
@@ -233,7 +233,7 @@ In summary, the contributions of this paper are:
 
 \begin{figure*}[t!]
     \centering
-        \includegraphics[width=\textwidth]{resources/architecture3}
+        \includegraphics[width=\textwidth]{resources/Annotation_Correction/architecture3}
     \caption{Schematic description of the proposed pipeline. Figure best viewed by zooming in.}
     \label{fig:archi}
 \end{figure*}
@@ -292,12 +292,12 @@ Let $d(\bm{x})$ be the decision function for SVMs. In our formulation, $d(\bm{x}
 % \begin{figure}[b!]
 %     \centering
 %     \begin{subfigure}[b]{0.2\textwidth}
-%             \includegraphics[width=\textwidth]{resources/landmark}
+%             \includegraphics[width=\textwidth]{resources/Annotation_Correction/landmark}
 %         \caption{Spare landmarks}
 %     \end{subfigure}
 %     \qquad
 %     \begin{subfigure}[b]{0.2\textwidth}
-%             \includegraphics[width=\textwidth]{resources/svs}
+%             \includegraphics[width=\textwidth]{resources/Annotation_Correction/svs}
 %         \caption{Decision function}
 %         \label{fig:svs}
 %     \end{subfigure}
@@ -307,7 +307,7 @@ Let $d(\bm{x})$ be the decision function for SVMs. In our formulation, $d(\bm{x}
 
 % \begin{figure}[b!]
 %     \centering
-%     \includegraphics[width=0.4\textwidth]{resources/svs2}
+%     \includegraphics[width=0.4\textwidth]{resources/Annotation_Correction/svs2}
 %     \caption{Exemplar SVS shape representation. A similar SVS image is obtained from different annotations of the same shape.}
 %     \label{fig:build_svs}
 % \end{figure}
@@ -375,19 +375,19 @@ To effectively build the correspondence basis, we first transform the original a
 \begin{figure}[t!]
     \centering
     \newcommand{\flowh}{0.25\columnwidth}
-    \includegraphics[height=\flowh]{resources/Fig_Flows/1}
-    \includegraphics[height=\flowh]{resources/Fig_Flows/2}
-    \includegraphics[height=\flowh]{resources/Fig_Flows/3}
-    \includegraphics[height=\flowh]{resources/Fig_Flows/4}
-    \includegraphics[height=\flowh]{resources/Fig_Flows/5}
-    \includegraphics[height=\flowh]{resources/Fig_Flows/6}
+    \includegraphics[height=\flowh]{resources/Annotation_Correction/Fig_Flows/1}
+    \includegraphics[height=\flowh]{resources/Annotation_Correction/Fig_Flows/2}
+    \includegraphics[height=\flowh]{resources/Annotation_Correction/Fig_Flows/3}
+    \includegraphics[height=\flowh]{resources/Annotation_Correction/Fig_Flows/4}
+    \includegraphics[height=\flowh]{resources/Annotation_Correction/Fig_Flows/5}
+    \includegraphics[height=\flowh]{resources/Annotation_Correction/Fig_Flows/6}
     \caption{Exemplar deformation fields for the left arm, obtained using the proposed pipeline. Figure best viewed by zooming in.}
     \label{fig:deformationfield}
 \end{figure}
 
 \begin{figure}[b!]
     \centering
-    \includegraphics[width=0.9\columnwidth]{resources/models}
+    \includegraphics[width=0.9\columnwidth]{resources/Annotation_Correction/models}
     \caption{Dense shape models build for faces and ears. Dense shapes are presented as grid for better visualization.}
     \label{fig:dense_models}
 \end{figure}
@@ -471,7 +471,7 @@ Figure~\ref{fig:deformationfield} shows some examples of deformation fields deri
 
 % \begin{figure}[h!]
 %     \centering
-%         \includegraphics[width=0.5\textwidth]{resources/df}
+%         \includegraphics[width=0.5\textwidth]{resources/Annotation_Correction/df}
 %     \caption{Deformation field built}
 %     \label{fig:deformationfield}
 % \end{figure}
@@ -486,11 +486,11 @@ Figure~\ref{fig:deformationfield} shows some examples of deformation fields deri
 % \begin{figure}[h!]
 %     \centering
 %     \begin{subfigure}[b]{0.22\textwidth}
-%             \includegraphics[width=\textwidth]{resources/Fig_dAAM/of_shape}
+%             \includegraphics[width=\textwidth]{resources/Annotation_Correction/Fig_dAAM/of_shape}
 %     \end{subfigure}
 %   	\hfill
 %     \begin{subfigure}[b]{0.22\textwidth}
-%             \includegraphics[width=\textwidth]{resources/Fig_dAAM/of_app}
+%             \includegraphics[width=\textwidth]{resources/Annotation_Correction/Fig_dAAM/of_app}
 %     \end{subfigure}
 %     \caption{Dense Deformable Model}
 %     \label{fig:models}
@@ -499,11 +499,11 @@ Figure~\ref{fig:deformationfield} shows some examples of deformation fields deri
 % \begin{figure}[h!]
 %     \centering
 %     \begin{subfigure}[b]{0.22\textwidth}
-%             \includegraphics[width=\textwidth]{resources/Fig_dAAM/of_shape}
+%             \includegraphics[width=\textwidth]{resources/Annotation_Correction/Fig_dAAM/of_shape}
 %     \end{subfigure}
 %   	\hfill
 %     \begin{subfigure}[b]{0.22\textwidth}
-%             \includegraphics[width=\textwidth]{resources/Fig_dAAM/of_app}
+%             \includegraphics[width=\textwidth]{resources/Annotation_Correction/Fig_dAAM/of_app}
 %     \end{subfigure}
 %     \caption{Dense Deformable Model}
 %     \label{fig:models}
@@ -553,7 +553,7 @@ We evaluate the performance of the proposed methodology for the task of human bo
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[width=\columnwidth]{resources/Fig_Variance/final}
+    \includegraphics[width=\columnwidth]{resources/Annotation_Correction/Fig_Variance/final}
     \caption{Example of human pose annotation for left arm among 4 annotators. The large variance highlights the difficulty of obtaining consistent landmarks.}
     \label{fig:variance}
 \end{figure}
@@ -561,37 +561,37 @@ We evaluate the performance of the proposed methodology for the task of human bo
 \begin{figure*}[!t]
     \newcommand{\fh}{0.24\columnwidth}
     \centering
-    \includegraphics[height=\fh]{resources/Fixing/fix_1}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_1}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_2}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_2}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_3}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_3}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_5}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_5}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_6}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_6}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_7}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_7}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_8}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_8}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_9}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_9}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_10}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_10}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_20}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_20}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_12}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_12}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_13}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_13}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_14}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_14}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_15}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_15}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_17}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_17}
     \hfill
-    \includegraphics[height=\fh]{resources/Fixing/fix_18}
+    \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_18}
     \caption{Demonstration of annotation correction using our method for the experiment of Section \ref{exp:qualitative}. \emph{Red} dots refer to officially provided landmarks, and \emph{green} dots are corrected position.}
     \label{fig:qualitative}
 \end{figure*}
@@ -599,49 +599,49 @@ We evaluate the performance of the proposed methodology for the task of human bo
 \begin{figure*}[!t]
     \newcommand{\ofh}{0.24\columnwidth}
     \centering
-    \includegraphics[height=\ofh]{resources/Fittings/20.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/20.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/3.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/3.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/19.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/19.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/4.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/4.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/6.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/6.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/15.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/15.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/7.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/7.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/8.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/8.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/13.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/13.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/17.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/17.eps}
     \\
-    \includegraphics[height=\ofh]{resources/Fittings/21.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/21.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/23.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/23.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/25.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/25.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/27.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/27.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/29.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/29.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/31.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/31.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/33.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/33.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/35.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/35.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/36.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/36.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/37.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/37.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/38.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/38.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Fittings/39.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/39.eps}
     \caption{Demonstration of outline fitting of patch-based AAM on arms.}
     \label{fig:outline_fitting}
     \vspace{-5pt}
@@ -661,10 +661,10 @@ In the case of human ear, given the lack of publicly available annotated databas
 \begin{figure}[b!]
     \vspace{-5pt}
     \centering
-    \includegraphics[width=0.6\columnwidth]{resources/DAAMBenchmark/legend}
+    \includegraphics[width=0.6\columnwidth]{resources/Annotation_Correction/DAAMBenchmark/legend}
     \\
-    \includegraphics[width=0.48\columnwidth]{resources/DAAMBenchmark/face}
-    \includegraphics[width=0.48\columnwidth]{resources/DAAMBenchmark/ear}
+    \includegraphics[width=0.48\columnwidth]{resources/Annotation_Correction/DAAMBenchmark/face}
+    \includegraphics[width=0.48\columnwidth]{resources/Annotation_Correction/DAAMBenchmark/ear}
     \caption{CEDs of faces and ears fitting performance for the experiment of Section \ref{exp:daam_benchmark}.}
     \label{fig:daam_benchmark}
 \end{figure}
@@ -680,10 +680,10 @@ In this experiment, we aim to compare the effect of training a deformable model 
 \begin{figure}[b!]
     \vspace{-5pt}
     \centering
-    \includegraphics[width=\columnwidth]{resources/HandBenchmark/legend}
+    \includegraphics[width=\columnwidth]{resources/Annotation_Correction/HandBenchmark/legend}
     \\
-    \includegraphics[width=0.48\columnwidth]{resources/HandBenchmark/wrist}
-    \includegraphics[width=0.48\columnwidth]{resources/HandBenchmark/elbow}
+    \includegraphics[width=0.48\columnwidth]{resources/Annotation_Correction/HandBenchmark/wrist}
+    \includegraphics[width=0.48\columnwidth]{resources/Annotation_Correction/HandBenchmark/elbow}
     \caption{CEDs over skeleton landmarks on BBC Pose database for the experiment of Section  \ref{exp:benchmark}.}
     \label{fig:hand_benchmark}
 \end{figure}
@@ -701,22 +701,22 @@ In the same experiment we prove that it is more advantageous to train a deformab
 % \begin{figure*}[!t]
 %     \newcommand{\fh}{0.24\columnwidth}
 %     \centering
-%     \includegraphics[height=\fh]{resources/Fixing/fix_1}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_2}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_3}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_5}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_6}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_7}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_8}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_9}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_10}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_20}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_12}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_13}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_14}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_15}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_17}
-%     \includegraphics[height=\fh]{resources/Fixing/fix_18}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_1}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_2}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_3}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_5}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_6}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_7}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_8}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_9}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_10}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_20}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_12}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_13}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_14}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_15}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_17}
+%     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_18}
 %     \caption{Demonstration of annotation correction using our method for experiment \ref{exp:qualitative}. \emph{Red} dots refer to officially provided landmarks, and \emph{green} dots are corrected position.}
 %     \label{fig:qualitative}
 % \end{figure*}
@@ -724,29 +724,29 @@ In the same experiment we prove that it is more advantageous to train a deformab
 % \begin{figure*}[!t]
 %     \newcommand{\ofh}{0.24\columnwidth}
 %     \centering
-%     \includegraphics[height=\ofh]{resources/Fittings/20.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/3.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/19.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/4.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/6.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/15.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/7.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/8.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/13.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/17.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/20.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/3.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/19.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/4.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/6.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/15.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/7.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/8.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/13.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/17.eps}
 %     \\
-%     \includegraphics[height=\ofh]{resources/Fittings/21.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/23.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/25.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/27.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/29.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/31.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/33.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/35.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/36.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/37.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/38.eps}
-%     \includegraphics[height=\ofh]{resources/Fittings/39.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/21.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/23.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/25.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/27.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/29.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/31.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/33.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/35.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/36.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/37.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/38.eps}
+%     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/39.eps}
 %     \caption{Demonstration of outline fitting of patch-based AAM on arms.}
 %     \label{fig:outline_fitting}
 % \end{figure*}
@@ -804,18 +804,16 @@ Learning and fitting statistical deformable models (SDMs) is one of the most imp
 \section{Supplementary}
 \begin{figure*}[!b]
 \centering
-\includegraphics[width=\textwidth]{resources/Suplementory_Meterial/Models/models}
+\includegraphics[width=\textwidth]{resources/Annotation_Correction/Suplementory_Meterial/Models/models}
 \caption{Principal components of dAAMs built on ears (top) and faces (bottom). The mean (middle columns) as well as the first five principal components are visualised for both shape (left) and appearance (right). $\pm 3$ times the variance of the corresponding component is used in each case.}
 \label{fig:pcamodel}
 \end{figure*}
 
 
-%%%%%%%%% Appendix
-\section*{Introduction}
+%%%%%%%%% Supplementory
+\section{Introduction}
 In this supplementary material, we provide additional algorithmic details for our shape flow estimation, as well as additional visualisations and evaluations for the dense and patch-based AAMs that were constructed using the proposed framework.
 
-
-\appendix
 \section{Implementation of Shape Flow Estimation}
 \label{sec:cost_function}
 
@@ -857,7 +855,7 @@ Figure~\ref{fig:compact} plots the variance ration of the face dAAM, which provi
 
 \begin{figure}[!t]
     \centering
-    \includegraphics[width=\columnwidth]{resources/Suplementory_Meterial/Model_Analysis/cumu_var_ratio}
+    \includegraphics[width=\columnwidth]{resources/Annotation_Correction/Suplementory_Meterial/Model_Analysis/cumu_var_ratio}
     \caption{Compactness plots of dAAM (blue) and sparse AAM (red) models for faces. Portion of the corresponding total variance explained as a function of the number of retained principal components.}
     \label{fig:compact}
 \end{figure}
@@ -868,12 +866,12 @@ Figure~\ref{fig:compact} plots the variance ration of the face dAAM, which provi
     \centering
     % \vspace*{-0.1in}
     \begin{subfigure}[b]{\columnwidth}
-            \includegraphics[width=\textwidth,trim={0 0 0 25pt},clip]{resources/Suplementory_Meterial/Model_Analysis/sr_ear}
+            \includegraphics[width=\textwidth,trim={0 0 0 25pt},clip]{resources/Annotation_Correction/Suplementory_Meterial/Model_Analysis/sr_ear}
         %\caption{dAAMs dense shape reconstruction}
     \end{subfigure}
     \\
     \begin{subfigure}[b]{\columnwidth}
-            \includegraphics[width=\textwidth,trim={0 0 0 25pt},clip]{resources/Suplementory_Meterial/Model_Analysis/sr_face}
+            \includegraphics[width=\textwidth,trim={0 0 0 25pt},clip]{resources/Annotation_Correction/Suplementory_Meterial/Model_Analysis/sr_face}
         %\caption{AAMs dense shape reconstruction}
     \end{subfigure}
     \caption{Dense shape reconstruction errors for ears (top) and faces (bottom), using AAMs (red) and dAAMs (blue). The average normalized dense point-to-point distance error is plotted as a function of the number of principal components of the model.}
@@ -887,91 +885,91 @@ Figure \ref{fig:rc_face} evaluates the dense shape reconstruction ability of the
 \begin{figure*}[!t]
     \newcommand{\ofh}{0.24\columnwidth}
     \centering
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0001.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0001.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0002.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0002.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0003.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0003.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0004.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0004.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0005.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0005.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0006.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0006.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0007.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0007.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0008.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0008.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0009.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0009.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0010.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0010.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0011.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0011.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0012.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0012.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0013.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0013.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0014.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0014.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0015.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0015.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0017.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0017.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0018.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0018.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0019.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0019.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0020.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0020.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0021.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0021.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0022.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0022.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0023.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0023.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0024.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0024.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0025.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0025.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0026.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0026.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0027.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0027.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0028.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0028.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0029.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0029.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0030.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0030.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0031.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0031.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0032.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0032.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0033.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0033.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0034.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0034.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0035.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0035.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0036.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0036.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0037.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0037.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0038.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0038.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0039.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0039.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0040.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0040.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0041.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0041.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0042.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0042.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0043.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0043.eps}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/ExFit/0044.eps}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/ExFit/0044.eps}
     \caption{Demonstration of outline fitting of patch-based AAM on arms. Images are cropped to arms only for better visualization.}
     \label{fig:paam_fittingresults}
 \end{figure*}
@@ -987,7 +985,7 @@ dAAMs that were built using the proposed framework. These results are characteri
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.5\textwidth]{resources/Suplementory_Meterial/Fittings/fittings}
+\includegraphics[width=0.5\textwidth]{resources/Annotation_Correction/Suplementory_Meterial/Fittings/fittings}
 \caption{Examples of fitting
 dAAMs that are constructed with the proposed pipeline. Results of dense fitting on images of
  ears (first two rows) and faces (last two rows). A grid visualisation is used.}
@@ -1006,17 +1004,17 @@ In this section, we present additional visualisations and evaluations for the pa
 \begin{figure}[!t]
 \centering
 \newcommand{\ofh}{0.24\columnwidth}
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/SparseSamples/mean.png}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/SparseSamples/mean.png}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/SparseSamples/mean-0.png}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/SparseSamples/mean-0.png}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/SparseSamples/mean-1.png}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/SparseSamples/mean-1.png}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/SparseSamples/mean-2.png}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/SparseSamples/mean-2.png}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/SparseSamples/mean-3.png}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/SparseSamples/mean-3.png}
     \hfill
-    \includegraphics[height=\ofh]{resources/Suplementory_Meterial/SparseSamples/mean-4.png}
+    \includegraphics[height=\ofh]{resources/Annotation_Correction/Suplementory_Meterial/SparseSamples/mean-4.png}
 \caption{Examples of sparse subsampling from dense shapes of arms. The dense correspondences (visualized via a deforming grid) are established using our shape flow estimation. The sparse landmarks (red dots) on the object outline are manually annotated only on the reference shape (left most image). In all other 5 example shapes, these landmarks have been automatically ``propagated'' using the established dense correspondences.}
 \label{fig:sparsesample}
 \end{figure}
@@ -1056,7 +1054,7 @@ Figure~\ref{fig:paam_sm} shows the mean shape and the first four principal shape
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{resources/Suplementory_Meterial/HandSMPAAM/handsmpaam}
+\includegraphics[width=\columnwidth]{resources/Annotation_Correction/Suplementory_Meterial/HandSMPAAM/handsmpaam}
 \caption{Principal components of our patch-based AAM for human arms.  The mean (left most column) as well as the first four principal components are visualised. $\pm 3$ times the variance of the corresponding component is used in each case.}
 \label{fig:paam_sm}
 \end{figure}
