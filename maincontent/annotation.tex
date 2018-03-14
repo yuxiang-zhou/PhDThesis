@@ -84,39 +84,39 @@
 \end{figure} 
 \begin{figure}[t!]
     \centering
-    \begin{subfigure}[b]{0.065\textwidth}
+    \begin{subfigure}{0.065\textwidth}
             \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_2_0}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.065\textwidth}
+    \begin{subfigure}{0.065\textwidth}
             \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_2_1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.065\textwidth}
+    \begin{subfigure}{0.065\textwidth}
             \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_2_2}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.085\textwidth}
+    \begin{subfigure}{0.085\textwidth}
             \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_1_0}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.085\textwidth}
+    \begin{subfigure}{0.085\textwidth}
             \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_1_1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.085\textwidth}
+    \begin{subfigure}{0.085\textwidth}
             \includegraphics[height=2.55cm]{resources/Annotation_Correction/Fig_Intro/intro_1_2}
     \end{subfigure}
     \\
-    \begin{subfigure}[b]{0.156\textwidth}
+    \begin{subfigure}{0.156\textwidth}
             \includegraphics[height=2.8cm]{resources/Annotation_Correction/Fig_Intro/intro_0_0}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.156\textwidth}
+    \begin{subfigure}{0.156\textwidth}
             \includegraphics[height=2.8cm]{resources/Annotation_Correction/Fig_Intro/intro_0_1}
     \end{subfigure}
   	\hfill
-    \begin{subfigure}[b]{0.156\textwidth}
+    \begin{subfigure}{0.156\textwidth}
             \includegraphics[height=2.8cm]{resources/Annotation_Correction/Fig_Intro/intro_0_2}
     \end{subfigure}
     \caption{Comparison of the standard landmark annotation (\emph{red} dots) with the curve annotation (\emph{blue} lines) on arms, ears and faces. It is evident that the curve annotations surpass the inevitable inconsistency of sparse annotations.}
@@ -317,7 +317,6 @@ We extend the SVS representation to support also the case where multiple curves 
 After constructing the SVS representation for all images, the next step is to apply a simple similarity alignment over them. This is done because the goal here is to build a model capable of effectively representing non-rigid local shape deformations rather than global rotation, translation and scaling. The alignment is performed by using the ICP algorithm \cite{Besl1992} on the annotated landmarks point cloud of the training images.
 
 
-\vspace{0.2cm}
 %\subsection{Correspondence Basis for Shape Flow Estimation}
 {\refstepcounter{steps}\label{sec:step2}\subsection*{Step 2: Correspondence Basis for Shape Flow Estimation}}
 
@@ -326,18 +325,14 @@ We define the problem of shape flow as the joint estimation of optical flow fiel
 Instead of the \emph{motion} basis used in multiframe optical flow formulation of \cite{Garg:2013hu}, we build a \emph{correspondence} basis that introduces constraints on how points of different shapes are matched to each other. Every pixel of the reference SVS image is matched to its corresponding position at every training SVS image and in this way defines a \emph{correspondence vector}. This vector consists of the 2D locations of the specific point in all SVS images. To form this vector, the training images are arranged in an arbitrary order. Similarly to the order of the training samples when PCA is applied, this order does not affect the result of our method and any re-ordering would produce exactly the same results.
 
 
-Formally, let $N_t$ be the number of training SVS images and $n=1,\ldots,N_t$ be the training image index. Also, let $\boldsymbol{q}_1(n),\ldots,\boldsymbol{q}_R(n):\{1,\ldots,N_t\} \rightarrow \R^2$ be the $R$ orthonormal elements of the correspondence basis, where $\boldsymbol{q}_i(n)$ is the displacement vector that matches the points of the reference SVS image with the points of the $n$-th training SVS image, according to the variation described from the $i$-th correspondence basis element. Note that the basis elements $\boldsymbol{q}_i(n)$ are independent from the point location. Note also that the number of basis elements is typically much smaller than the full dimensionality ($2 N_t$) of correspondence vectors, therefore this basis plays a role of dimensionality reduction. 
+Formally, let $N_t$ be the number of training SVS images and $n=1,\dots,N_t$ be the training image index. Also, let $\bm{q}_1(n),\dots,\bm{q}_R(n):\{ 1,\dots,N_t \} \rightarrow R^2$ be the $R$ orthonormal elements of the correspondence basis, where $\bm{q}_i(n)$ is the displacement vector that matches the points of the reference SVS image with the points of the $n$-th training SVS image, according to the variation described from the $i$-th correspondence basis element. Note that the basis elements $\bm{q}_i(n)$ are independent from the point location. Note also that the number of basis elements is typically much smaller than the full dimensionality ($2 N_t$) of correspondence vectors, therefore this basis plays a role of dimensionality reduction. 
 
-
-In addition, let $\Omega \subset \R^2$ be the image domain of the SVS images and $\bx$ denote the point location. We denote the shape flow result as $\bm{u}_n(\bx):\Omega\times \{1,\ldots,N_t\}
-\rightarrow \R^2$,  where $\bm{u}_n(\bx)$ is the displacement vector that matches the point $\bx$ of the reference SVS image with its corresponding location at the $n$-th training SVS image.
+In addition, let $\Omega \subset R^2$ be the image domain of the SVS images and $\bx$ denote the point location. We denote the shape flow result as $\bm{u}_n(\bx):\Omega\times \{1,\dots,N_t\} \rightarrow R^2$,  where $\bm{u}_n(\bx)$ is the displacement vector that matches the point $\bx$ of the reference SVS image with its corresponding location at the $n$-th training SVS image.
 
 Using the constructed correspondence basis, the shape flow can be approximated as:
-\vspace{-5pt}
 \begin{equation}\label{eq:LinTrajModel}
     \bm{u}_n(\bx) \approx
     \textstyle \, \sum_{i=1}^R \, \bm{q}_i(n)v_i(\bx) \,\, ,
-\vspace{-5pt}
 \end{equation}
 where $v_i(\bx)$ is the weight that needs to be applied on the $i$-th correspondence basis element, in order to get the correspondence vector for the point location $\bm{x}$. In other words, the shape flow for every point $\bm{x}$ is described as a linear combination of basis elements that is controlled by the coefficients $v_i(\bm{x})$.
 The values of the $i$-th coefficient for all the points $v_i(\bm{x})$ can be interpreted as an image defined on $\Omega$. Using the correspondence basis, the determination of the shape flow boils down to the determination of the set of coefficients $v_i(\bm{x})$. The above representation of shape flow, constrains the correspondence vectors to lie on a subspace and, therefore, acts as a low-rank prior that enforces coherency of the shape registration result over the whole training dataset of shapes.
@@ -396,7 +391,6 @@ To effectively build the correspondence basis, we first transform the original a
 
 
 % ---------------------------------------------------------------------------------------------------------------------------------------------------
-\vspace{0.3cm}
 {\refstepcounter{steps}\label{sec:step3}\subsection*{Step 3: Shape Flow Estimation}}
 % \subsection{Shape Flow Estimation}
 % \label{sec:step3}
@@ -411,15 +405,13 @@ As already mentioned, our shape flow estimation builds upon robust methods for m
 %In order to learn the such a subspace, we first transform the original annotation to point clouds. Then, we use NICP to align the previous point clouds with respect to a reference point cloud template. NICP iteratively deforms each point cloud until its points match the ones on the shape template and correspondences are established. However, because optical flow is a pixel-wise frame registration technique, we need to establish correspondences for all pixels on the reference frame rather than for sparse point clouds. To achieve this, we apply Thin Plate Spline (TPS) \cite{Bookstein1989} to find correspondences for all pixels in the reference frame given the point cloud correspondences provided by the previous NICP stage. Once dense correspondences have been established among all pixels, the so-called correspondence subspace is obtained by performing PCA the trajectory of all pixels. Note that incorporating the previous subspace as a low rank constrained in optical flow is consistent with its assumption of smooth motion.
 
 
-Let $\bm{d}(\bx;n)$, $\bm{d}(\bx;0):\Omega\rightarrow \R^{N_c}$ be the $n$-th training SVS image and the reference SVS image respectively. Following \cite{Garg:2013hu}, we propose to estimate the shape flow over all training images by minimizing the following energy:
-\vspace{-5pt}
+Let $\bm{d}(\bx\;n)$, $\bm{d}(\bx\;0):\Omega\rightarrow R^{N_c}$ be the $n$-th training SVS image and the reference SVS image respectively. Following \cite{Garg:2013hu}, we propose to estimate the shape flow over all training images by minimizing the following energy:
 \begin{align}
 E_{sf} & =\alpha
 \int_{\Omega}\sum_{n=1}^{N_t} \|\bm{d}(\bx+\bm{u}_n(x);n)-\bm{d}(x;0)\| \ud \bx \label{eq:costfunc}\\
     &+ \beta \int_{\Omega}\sum_{n=1}^{N_t}\|\bm{u}_n(\bx)-\sum_{i=1}^R\bm{q}_i(n)v_i(\bx)\|^2 \ud \bx \label{eq:lowrank}\\
     &+
 \int_\Omega  \sum_{i=1}^R \,\, \left \|    \nabla v_i(\bx)    \right \|  \,\ud \bx \label{eq:TVterm}
-\vspace{-5pt}
 \end{align}
 This energy consists of two sets of unknown shape flows that are relatively close to each other: (i) $\bm{u}_n(x)$ which tries to explain the data from the input SVS images, and (ii) the shape flow determined by the correspondence basis coefficients $v_i(\bx)$ that are spatially regularised and enforce a low-rank prior.
 %We minimize this energy jointly with respect to $\bm{u}_n(\bx)$ and $v_i(\bx)$.
@@ -469,7 +461,7 @@ Figure~\ref{fig:deformationfield} shows some examples of deformation fields deri
 %
 %After solving the equation, $\bm{u}_n(\bm{x}), x \in \Omega$ gives a group of deformation fields that registering every decision functions in the shape sequence to reference frame e.g. $\bm{u_1}(\bm{x})$ registers decision function $\bm{d_1}(\bm{x})$ to the reference frame. Figure~\ref{fig:deformationfield} demonstrates deformation fields that warps from reference frame where there is no deformation.
 
-% \begin{figure}[h!]
+% \begin{figure}[ht]
 %     \centering
 %         \includegraphics[width=0.5\textwidth]{resources/Annotation_Correction/df}
 %     \caption{Deformation field built}
@@ -483,7 +475,7 @@ Figure~\ref{fig:deformationfield} shows some examples of deformation fields deri
 %     \bm{s_p}=\bm{\bar{s}} + \bm{U}_s\bm{p}
 % \end{equation*}
 % where $\bm{s_p}$ is deformed shape instance. $\bm{\bar{s}}$ is mean shape and $\bm{U}_s\bm{p}$ are eigenvectors with corresponding parameters $p$. Figure~\ref{fig:models} shows an instance of deformed shape and appearance model.
-% \begin{figure}[h!]
+% \begin{figure}[ht]
 %     \centering
 %     \begin{subfigure}[b]{0.22\textwidth}
 %             \includegraphics[width=\textwidth]{resources/Annotation_Correction/Fig_dAAM/of_shape}
@@ -496,7 +488,7 @@ Figure~\ref{fig:deformationfield} shows some examples of deformation fields deri
 %     \label{fig:models}
 % \end{figure}
 
-% \begin{figure}[h!]
+% \begin{figure}[ht]
 %     \centering
 %     \begin{subfigure}[b]{0.22\textwidth}
 %             \includegraphics[width=\textwidth]{resources/Annotation_Correction/Fig_dAAM/of_shape}
@@ -509,7 +501,6 @@ Figure~\ref{fig:deformationfield} shows some examples of deformation fields deri
 %     \label{fig:models}
 % \end{figure}
 
-\vspace{0.3cm}
 {\refstepcounter{steps}\label{sec:step4}\subsection*{Step 4: Dense and Patch-Based Deformable Models}}
 % \subsection{Dense and Patch-Based Active Appearance Models}
 
@@ -593,7 +584,7 @@ We evaluate the performance of the proposed methodology for the task of human bo
     \hfill
     \includegraphics[height=\fh]{resources/Annotation_Correction/Fixing/fix_18}
     \caption{Demonstration of annotation correction using our method for the experiment of Section \ref{exp:qualitative}. \emph{Red} dots refer to officially provided landmarks, and \emph{green} dots are corrected position.}
-    \label{fig:qualitative}
+    \label{fig:qualitative_anno}
 \end{figure}
 
 \begin{figure}[!t]
@@ -644,7 +635,6 @@ We evaluate the performance of the proposed methodology for the task of human bo
     \includegraphics[height=\ofh]{resources/Annotation_Correction/Fittings/39.eps}
     \caption{Demonstration of outline fitting of patch-based AAM on arms.}
     \label{fig:outline_fitting}
-    \vspace{-5pt}
 \end{figure}
 
 
@@ -659,7 +649,6 @@ Herein, we compare the fitting accuracy of the dAAMs that are trained with our p
 In the case of human ear, given the lack of publicly available annotated databases, we collected 605 high resolution images captured under unconstrained conditions from online search engines. The images were manually annotated with respect to 55 sparse landmarks, as well as the curve annotations proposed in this paper. Examples of these two types of annotations are shown in Figure~\ref{fig:intro_annotation_correction}. We randomly split the database into two disjoint sets of training (500) and testing (105) images. The training and evaluation of the two models is done in the same way as in the case of face.
 
 \begin{figure}[b!]
-    \vspace{-5pt}
     \centering
     \includegraphics[width=0.6\columnwidth]{resources/Annotation_Correction/DAAMBenchmark/legend}
     \\
@@ -678,7 +667,6 @@ In this experiment, we aim to compare the effect of training a deformable model 
 
 
 \begin{figure}[b!]
-    \vspace{-5pt}
     \centering
     \includegraphics[width=\columnwidth]{resources/Annotation_Correction/HandBenchmark/legend}
     \\
@@ -755,7 +743,7 @@ In the same experiment we prove that it is more advantageous to train a deformab
 \label{exp:qualitative}
 The final experiment demonstrates that it is feasible to use the proposed arm model in order to correct the annotations provided by current datasets. As mentioned above there are inconsistencies in the annotations of MPII~\cite{andriluka14cvpr}, Fashion Pose~\cite{dantone2013human} and FLIC~\cite{sapp2013modec}. Due to the large variance in arm pose, it is difficult even for trained annotators to obtain consistent annotations between them. As proof of concept, Figure~\ref{fig:variance} reports the standard deviation observed between the annotations of 4 trained humans that were requested to annotate 120 images of left arms from Fashion Pose~\cite{dantone2013human} with respect to the shoulder, elbow and wrist.
 
-By applying our outline patch-based AAM on the aforementioned databases, we managed to greatly correct the currently available annotations of the arm. Figure~\ref{fig:qualitative} shows indicative examples of the corrected landmarks. There is no doubt that points after correction demonstrate more consistency among images. We make the corrected annotations publicly available\textsuperscript{\ref{foot:annotations}}.
+By applying our outline patch-based AAM on the aforementioned databases, we managed to greatly correct the currently available annotations of the arm. Figure~\ref{fig:qualitative_anno} shows indicative examples of the corrected landmarks. There is no doubt that points after correction demonstrate more consistency among images. We make the corrected annotations publicly available\textsuperscript{\ref{foot:annotations}}.
 
 
 
@@ -819,14 +807,12 @@ In this supplementary material, we provide additional algorithmic details for ou
 
 
 As mentioned in the main paper (Section 3, Step 3), we propose to estimate the shape flow by minimising the following energy:
-\vspace{-5pt}
 \begin{align}
 E_{sf} & =\alpha
 \int_{\Omega}\sum_{n=1}^{N_t} \|\bm{d}(\bx+\bm{u}_n(x);n)-\bm{d}(x;0)\| \ud \bx \\
     &+ \beta \int_{\Omega}\sum_{n=1}^{N_t}\|\bm{u}_n(\bx)-\sum_{i=1}^R\bm{q}_i(n)\bm{v}_i(\bx)\|^2 \ud \bx \\
     &+
-\int_\Omega  \sum_{i=1}^R \,\, \left \|    \nabla \bm{v}_i(\bx)    \right \|  \,\ud \bx \label{eq:TVterm}
-\vspace{-5pt}
+\int_\Omega  \sum_{i=1}^R \,\, \left \|    \nabla \bm{v}_i(\bx)    \right \|  \,\ud \bx
 \end{align}
 We minimise this energy jointly with respect to $\bm{u}_n(\bx)$ and $\bm{v}_i(\bx)$, which correspond to the
 two sets of unknown shape flows.
@@ -864,7 +850,6 @@ Figure~\ref{fig:compact} plots the variance ration of the face dAAM, which provi
 
 \begin{figure}[!t]
     \centering
-    % \vspace*{-0.1in}
     \begin{subfigure}[b]{\columnwidth}
             \includegraphics[width=\textwidth,trim={0 0 0 25pt},clip]{resources/Annotation_Correction/Suplementory_Meterial/Model_Analysis/sr_ear}
         %\caption{dAAMs dense shape reconstruction}

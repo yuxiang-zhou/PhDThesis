@@ -76,7 +76,7 @@ To the best of our knowledge the only ear database that has been collected ``in-
 
 \section{``In-the-wild'' Ear database}
 \label{label:ear_db}
-We collected two sets of ear images ``in-the-wild''\footnote{\label{foot:annotations}Both Collection A and B are publicly available in http://www.ibug.doc.ic.ac.uk/resources/ibug-ears.}. The first was used for  statistical deformable model construction, while the latter was used for ear verification and recognition ``in-the-wild''.
+We collected two sets of ear images ``in-the-wild''\footnote{\label{foot:annotations_ear}Both Collection A and B are publicly available in http://www.ibug.doc.ic.ac.uk/resources/ibug-ears.}. The first was used for  statistical deformable model construction, while the latter was used for ear verification and recognition ``in-the-wild''.
 
 \begin{figure}[!b]
     \centering
@@ -132,19 +132,19 @@ We have applied many state-of-the-art statistical deformable models for ear land
 
 
 \subsection{Holistic Active Appearance Model}
-\label{sec:bg_aam}
+\label{sec:bg_aam_ear}
 AAM method consists of a linear statistical model of the shape and appearance of an object. During fitting, they aim to minimise the appearance reconstruction error with respect to the parameters of the shape and appearance models. Initially it was proposed to optimise their cost function using regression \cite{Cootes2001}. Later, it was also shown that they can achieve state-of-the-art performance by employing the Gauss-Newton optimisation \cite{Matthews2004,antonakos2015feature}.
 
 \noindent\textbf{Shape Model}
 A shape vector is defined by concatenating the coordinates of its landmarks. A shape model can be trained by applying Generalized Procrustes Analysis followed by Principal Component Analysis (PCA) on a set of training shapes. The shape model can then be used to generate shape instances with $N_L$ landmarks as
 \begin{equation} 
-\label{eq:shape_model}
+\label{eq:shape_model_ear}
 \bm{s_p}=\bm{\bar{s}}+\bm{U_S}\bm{p}
 \end{equation} 
 where a shape is represented as $\bm{s}=[x_1,y_1,..,x_{N_L},y_{N_L}]^T$, and $\bm{\bar{s}}$ is the mean shape, $\bm{p}$ are the shape parameters and $\bm{U_s}$ are the principal components matrix of dimension $\bm{U_S} \in \Re^{2N_L\times N_p}$, where $N_p$ represent the number of eigenvectors.
 
 \noindent\textbf{Appearance Model}
-\label{sec:appearance_model}
+\label{sec:appearance_model_ear}
 A holistic appearance is defined as the values of the pixels that lie inside a shape $\bm{s}$. Similar to shape models, an appearance model is trained using PCA. Given the appearance eigenvectors $\bm{U_A}$, the mean appearance $\bm{\bar{a}}$ and a set of parameters $\bm{\lambda}$, a new appearance can be generated as 
 \begin{equation} 
 \label{eq:appearance_model}
@@ -157,7 +157,7 @@ where $\bm{a}$ denotes the vector of pixels that lie within a shape,  $\bm{\bar{
 \noindent\textbf{Fitting}
 The aim of fitting is to minimise the $\ell_2^2$ norm between the warped appearance of an input image $\bm{T}(\mathcal{W}(\bm{p}))$ and the appearance model instance $\bm{a_\lambda}$ with respect to the shape and appearance parameters, i.e. 
 \begin{equation} 
-\label{eq:aamfittingbase}
+\label{eq:aamfitting_ear}
     \argmin_{\bm{p}, \bm{\lambda}}||\bm{T}(\mathcal{W}(\bm{p}))-\bm{\bar{a}}-\bm{U_A}\bm{\lambda}||^2
 \end{equation}
 
@@ -170,13 +170,13 @@ The aim of fitting is to minimise the $\ell_2^2$ norm between the warped appeara
 \end{equation}
 Thereby the cost function for inverse compositional algorithm are:
 \begin{equation}
-\label{eq:inversecomposition}
+\label{eq:inversecomposition_ear}
 \argmin_{\bm{\Delta p}, \bm{\lambda}}||\bm{T}(\mathcal{W}(\bm{p}))-\bm{\bar{a}}(\mathcal{W}(\bm{\Delta p}))-\bm{U_A}(\mathcal{W}(\bm{\Delta p}))\bm{\lambda}||^2
 \end{equation}
 where $\mathcal{W}(\bm{\Delta p})$ denotes incremental warp on template image. 
-Applying first order Taylor expansion on equation~\ref{eq:inversecomposition} gives:
+Applying first order Taylor expansion on equation~\ref{eq:inversecomposition_ear} gives:
 \begin{equation}
-\label{eq:forwardcompositiontaylor}
+\label{eq:forwardcompositiontaylor-ear}
 \argmin_{\bm{\Delta p}, \bm{\lambda}}||\bm{T}(\mathcal{W}(\bm{p}))-\bm{\bar{a}}-\bm{U_A}\bm{\lambda}-\bm{J}|_{\bm{p}=\bm{0}}\bm{\Delta p}||^2
 \end{equation}
 where Jacobian term is defined as:
@@ -243,16 +243,16 @@ where Jacobian term is defined as:
 
 \noindent\textbf{Alternating Minimisation}
 As the expression revealed, there are two variables contained ($\bm{p}$ and $\bm{\lambda}$) so it is of importance to minimise them simultaneously. As there is no dependency between AAM shape and appearance, solving $\bm{p}$ and $\bm{\lambda}$ alternatively is used by IC Algorithm. Cost functions corresponding to $\bm{\Delta p}$ and $\bm{\Delta \lambda}$ are:
-% Considering creating a linear subspace, which is spanned by collection of appearance component vector $A_i$, denoted as $span(A_i)$ and $span(A_i)^\perp$ as orthogonal complement subspace. Therefore \ref{eq:aamfittingbase} can be rewrite as:
+% Considering creating a linear subspace, which is spanned by collection of appearance component vector $A_i$, denoted as $span(A_i)$ and $span(A_i)^\perp$ as orthogonal complement subspace. Therefore \ref{eq:aamfitting_ear} can be rewrite as:
 \begin{align}
-    \label{eq:aamfittingappearancevariance}
+    \label{eq:aamfittingappearancevariance_ear}
     & \argmin_{\bm{\Delta p}}||\bm{T}(\mathcal{W}(\bm{p}))-\bm{a_\lambda}\mathcal{W}(\bm{\Delta p})||^2_{\bm{\hat{U}_A}} \\
     & \argmin_{\bm{\Delta\lambda}}||\bm{T}(\mathcal{W}(\bm{p}))-\bm{a_{\lambda+\Delta \lambda}}\warp{\deltap})||^2
 \end{align}
 
 where $||.||^2_{\bm{\hat{U}_A}}$ denotes vector projected into subspace $\bm{\hat{U}_A}$, which is orthogonal complements of appearance $\bm{\hat{U}_A}=\bm{I}-\bm{U_A} \bm{U_A}^T$. Because norm considers only orthogonal components of subspace, so any other components lies in $\bm{\hat{U}_A}$ can be dropped. So the optimisation is accomplished by (1) fixing appearance parameter $\bm{\lambda}$ to compute $\bm{\Delta p}$ (2) then, similarly, fixing shape parameter $\bm{p}$ to compute $\bm{\Delta\lambda}$. By given estimation of $\bm{\lambda}$, we can solve $\Delta p$ in closed form as: 
 \begin{equation}
-    \label{eq:dpic}
+    \label{eq:dpic_ear}
     \bm{\Delta p}=\bm{H}^{-1}\bm{J}^T[\bm{T}(\mathcal{W}(\bm{p}))-\bm{\bar{a}}-\bm{U_A}\bm{\lambda}]
 \end{equation}
 where $\bm{H}$ is the Hessian matrix $\bm{H}=\bm{J}^T\bm{J}$. Given estimation of $\bm{p}$, appearance parameters can be solved as least-squares solution:
@@ -437,7 +437,7 @@ From the results reported in Table \ref{tab:ear_recognition} we can deduce the f
     \label{fig:ear_benchmark}
     \end{figure}
     
-    \begin{table}[h!]
+    \begin{table}[ht]
     \centering
     \scriptsize
     \begin{tabular}{|l|c|c|}

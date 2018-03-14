@@ -26,15 +26,15 @@ f(x)=\sum^m_{i=1}\alpha_iexp(-\gamma||x-x^*_i||^2)
 
 For training SVS, arbitrary points lies in shapes are chosen as positive training samples, while random external points that close to shape contour are sampled as negative training set. Lastly, v-SVM \cite{scholkopf2001estimating} are employed to learn the decision function to separate positive and negative points.
 
-\begin{figure}[h]
+\begin{figure}
     \centering
-    \begin{subfigure}[b]{0.5\textwidth}
+    \begin{subfigure}[b]{0.5\linewidth}
         \includegraphics[width=\textwidth]{resources/Background/svs_samples} 
         \caption{Sampled Positive(white) and Negative(blue) Points}
         \label{fig:svs1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.4\linewidth}
         \includegraphics[width=\textwidth]{resources/Background/trained_svs} 
         \caption{Trained SVS Shape}
         \label{fig:svs2}

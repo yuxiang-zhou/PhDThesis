@@ -112,7 +112,7 @@ W(x;p) = W(x;p)\circ W(x;\delta p)^{-1}
 \end{equation}
 Applying Taylor expansion on equation \ref{eq:inversecomposition} gives:
 \begin{equation}
-\label{eq:forwardcompositiontaylor}
+\label{eq:inversecompositiontaylor}
 ||I(W(x;p))-A_0(W(x;\delta p))-\nabla A_0\frac{\partial W}{\partial p}\delta p||^2
 \end{equation}
 where $W(x;0)$ is the identical warp that $W(x;0) = x$. The closed form solution of $\delta p$ is:
@@ -131,10 +131,9 @@ As the equation states, image template $A_0$ is constant and $\frac{\partial W}{
 
 The pseudo code of AAM fitting using inverse compositional algorithm is shown in Algorithm \ref{alg:aam}\cite{Matthews2004}:
 
-\begin{algorithm}[h]
+\begin{algorithm}[ht]
 \caption{Fitting Active Appearance Model with Inverse Compositional Algorithm}
 \label{alg:aam}
-\DontPrintSemicolon
 Compute gradient $\nabla A_0$ of image template $A_0(x)$\;
 Compute Jacobian $\frac{\partial W}{\partial p}$ at $(x;0)$\;
 Compute Hessian matrix $H$\;

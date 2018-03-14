@@ -1,15 +1,33 @@
-
-
 \usepackage{graphicx}
 \usepackage{verbatim}
 \usepackage{latexsym}
 \usepackage{mathchars}
 \usepackage{setspace}
+\usepackage{subcaption}
+\usepackage{algorithm2e}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{afterpage}
+\usepackage{amsfonts}
 
 \input{blocked.sty}
 \input{uhead.sty}
 \input{boxit.sty}
 \input{icthesis.sty}
+
+\newcommand{\bu}{\bm{u}}
+\newcommand{\bx}{\bm{x}}
+\newcommand{\bp}{\bm{p}}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\Lone}{\mathbf{L}^1}
+\newcommand{\Ltwo}{\mathbf{L}^2}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\def\warp#1{{\mathcal{W}(#1)}}
+\def\deltap{{\bm{\Delta p}}}
 
 \newcommand{\ipc}{{\sf ipc}}
 
@@ -134,97 +152,3 @@
  }
  \end{figure}
 }
-
-% ------ New Package Here ------
-
-\usepackage{times}
-\usepackage{epsfig}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{minitoc}
-\usepackage{caption}
-\usepackage{dblfloatfix}
-\usepackage{subcaption}
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\usepackage{bm}
-\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks=true,bookmarks=true]{hyperref}
-\usepackage[parfill]{parskip}
-\usepackage{afterpage}
-
-\hyphenation{Den-se-Reg}
-
-\makeatletter
-\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
-\newcommand\eg{e.g. }
-\newcommand\ie{e.g. }
-
-\newenvironment{acknowledgement}%       New acknowledgement environment
-    {\large\bfseries Acknowledgement%
-    \par\medskip\normalfont\normalsize}%
-    {}%
-\makeatother
-
-\def\warp#1{{\mathcal{W}(#1)}}
-\def\deltap{{\bm{\Delta p}}}
-
-% --------Settings-------------------------------------
-\setlength{\belowcaptionskip}{-5pt}
-\setlength{\abovecaptionskip}{0pt}
-%---------MATH SYMBOLS NEW COMMANDS:--------------------------------------
-\newcommand{\vectornorm}{|}
-
-\newcommand{\diver}{\mathrm{div}}
-\newcommand{\grad}{\mathrm{grad}}
-\newcommand{\trace}{\mathrm{trace}}
-\newcommand{\ud}{\mathrm{d}}
-
-\newcommand{\mvec}[1]{\boldsymbol{#1}}
-\newcommand{\matr}[1]{\mathrm{#1}}
-
-\newcommand{\eye}{\mathrm{I}}
-\newcommand{\img}{u}
-
-\newcommand{\prob}[1]{\mathrm{p}\left( #1 \right)}
-
-\newcommand{\bhat}{\widehat{\mvec{b}}}
-\newcommand{\lamhat}{\widehat{\mvec{\lambda}}}
-\newcommand{\eps}{\mvec{\varepsilon}}
-
-%\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
-% \newcommand{\norm}[1]{\left \|#1 \right \|}
-\newcommand{\norm}[1]{\left |#1 \right |}
-\newcommand{\transp}{^\mathrm{T}}
-
-\newcommand{\bu}{\boldsymbol{u}}
-\newcommand{\bx}{\boldsymbol{x}}
-\newcommand{\bp}{\boldsymbol{p}}
-
-\newcommand{\be}{\boldsymbol{\varepsilon}}
-
-\newcommand{\bv}{\boldsymbol{v}}
-\newcommand{\mfsf}[0]{{\sc mfsf}}
-\newcommand{\mfsfc}[0]{{\sc mfsf\em c}}
-\newcommand{\mfsfdct}[0]{{\sc mfsf$_{\tt DCT}$}}
-\newcommand{\mfsfpca}[0]{{\sc mfsf$_{\tt PCA}$}}
-\newcommand{\mfsfid}[0]{{\sc mfsf$_{\tt I_{2F}}$}}
-\newcommand{\mfsfcdct}[0]{{\sc mfsf\em c$_{\tt DCT}$}}
-\newcommand{\mfsfcpca}[0]{{\sc mfsf\em c$_{\tt PCA}$}}
-\newcommand{\mfsfcid}[0]{{\sc mfsf\em c$_{\tt I_{2F}}$}}
-
-
-\newcommand{\cU}{\mathcal{U}}
-\newcommand{\bU}{\boldsymbol{\mathcal{U}}}
-\newcommand{\bE}{\boldsymbol{\mathcal{E}}}
-\newcommand{\bI}{\boldsymbol{I}}
-\newcommand{\bA}{\boldsymbol{A}}
-\DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\argmax}{arg\,max}
-
-
-\newcommand{\bL}{\boldsymbol{L}}
-\newcommand{\bM}{\boldsymbol{M}}
-
-\newcommand{\R}{\mathbb{R}}
-
-\newcommand{\Lone}{\mathbf{L}^1}
-\newcommand{\Ltwo}{\mathbf{L}^2}

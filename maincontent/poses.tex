@@ -110,7 +110,7 @@ In the stacked hourglass paper the best body pose estimation results have been a
 
     
     \caption{TOP:Exemplar joints localization on MPII and LSP test set. BOT: Exemplar predictions of estimated dense whole body joints correspondence. Figure best viewed by zooming in.}
-    \label{fig:qualitative}
+    \label{fig:qualitative_svs}
 \end{figure}
 
 \begin{table}[t!]
@@ -159,13 +159,13 @@ Our Model& 95.8  & \textbf{95.8}  & \textbf{94.9}  & \textbf{92.3}  & \textbf{95
 
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{1\textwidth}
+    \begin{subfigure}{1\textwidth}
         \includegraphics[width=1\linewidth]{resources/Human_Poses/Zumba}
         \caption{Zumba}
         \label{fig:subfig1}
     \end{subfigure}
 
-    \begin{subfigure}[b]{1\textwidth}
+    \begin{subfigure}{1\textwidth}
         \includegraphics[width=1\linewidth]{resources/Human_Poses/Long_jump}
         \caption{Long Jump}
         \label{fig:subfig2}
@@ -215,7 +215,7 @@ where completeness term is active only when class label is not background.
 
 Results reported on MPII are obtained by using SVS supervision signal. Figure \ref{fig:mpii} plot the cumulative error distribution on MPII test set and Table \ref{tab:mpii} summarize the quantitative results. Comparison with the state-of-the-art on LSP dataset is shown in Figure \ref{fig:lsp} and Table \ref{tab:lsp}. 
 
-Some qualitative results are collected in Fig~\ref{fig:qualitative} for the test sets of MPII and LSP. Top three rows show joint localization in challenging poses e.g. extreme viewing angles, challenging poses, occlusions, self occlusions and ambiguities. Bottom row demonstrates dense shape correspondence estimated on test images using SVS signal.
+Some qualitative results are collected in Fig~\ref{fig:qualitative_svs} for the test sets of MPII and LSP. Top three rows show joint localization in challenging poses e.g. extreme viewing angles, challenging poses, occlusions, self occlusions and ambiguities. Bottom row demonstrates dense shape correspondence estimated on test images using SVS signal.
 
 \subsection{Action Localization}
 
@@ -262,7 +262,7 @@ DenseReg code and demonstrations are made available at \url{http://alpguler.com/
 
 
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \begin{center}
        \includegraphics[width=1\linewidth]{resources/Human_Poses/denseregPami2}
     \end{center}
@@ -374,7 +374,7 @@ We compute a bijective mapping $\psi$, from template mesh $\bm{X}$ to the 2D can
 %
 
 \subsection{Supervision for the face template}
-
+\label{sec:quantized}
 We exploit the availability of facial landmark annotations ``in the wild'', to fit the template face to the image by obtaining a coordinate transformation for each vertex $\bm{x}_j$. 
 We use the fittings provided by \cite{zhu2016face} which were fit using a modified 3DMM implementation \cite{romdhani2005estimating}. However, for the purpose of this paper, we require a per-pixel estimate of the location in UV space on our template mesh and thus do not require an estimate of the projection or model parameters as required by other 3D landmark recovery methods \cite{jourabloo2016large,zhu2016face}. The per-pixel UV coordinates are obtained through rasterization of the fitted mesh and non-visible vertices are culled via z-buffering.
 
@@ -400,7 +400,7 @@ In order to handle the complex geometry of the human shape, we manually partitio
 %
  
 
-\begin{figure}[h!]
+\begin{figure}[ht]
 \begin{center}
    \includegraphics[width=1 \linewidth ]{resources/Human_Poses/IUV_Figure3}
 \end{center}
@@ -432,7 +432,7 @@ Building on these successes, we propose a hybrid method that combines a classifi
 For the human bodies, the regions are modeled by hand and for the facial regions, we use a simple geometric approach:
 We tesselate the template's surface with a cartesian grid, by uniformly and separately quantizing the $u^h$ and $u^v$ coordinates into $K$ bins, where $K$ is a design parameter. For any image that is brought into correspondence with the template domain, this induces a discrete labelling, which can be recovered by training a  CNN for classification.
     
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
     \includegraphics[width=1\linewidth ]{resources/Human_Poses/discreteFaces}
 \end{center}
@@ -510,7 +510,7 @@ Different objects have different degrees of articulation. Hence, we have used di
 
 On the other hand because body is a highly articulated object, with each part having each own self-occlusion maps (i.e., a hand or a foot can be occluded with the rest of the body being visible), we created a UV map per part. In total we split the body in 25 parts, as visualized in in Fig. \ref{fig:IUV}, and we applied quantised regression for each of the UV maps of the 25 body regions (parts). Hence, for the human body the network takes as input the three RGB channels of the image and outputs 75 channels. That is, three channels for each of the 25 parts (one for the U coordinates of the part, one for the V coordinates of the part and one for tessellated coordinates). 
 
-\begin{figure}[h!]
+\begin{figure}[ht]
 \begin{center}
     \includegraphics[width=0.49 \linewidth ]{resources/Human_Poses/PoseReg_Frontpage4-2}
     \includegraphics[width=0.49 \linewidth ]{resources/Human_Poses/PoseReg_Frontpage5-2}
@@ -582,7 +582,7 @@ For the DenseReg cascade architecture (i.e., end-to-end trainable dense shape re
 As discussed in Sec.~\ref{sec:SDMs}, any labelling function defined on the template shape can be transferred to the image domain using the regressed coordinates. One application that can be naturally represented on the template shape is semantic segmentation of facial parts. 
 To this end, we manually defined a segmentation mask of $8$ classes  (right/left eye, right/left eyebrow, upper/lower lip, nose, other) on the template shape, as shown in Fig.~\ref{fig:Semantic}. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=\linewidth ]{resources/Human_Poses/segs-3}
 \caption{Exemplar semantic segmentation results.}
@@ -597,7 +597,7 @@ Table~\ref{tab:Semantic} reports evaluation results using the intersection-over-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \begin{tabular}{|l|cc|}
 \hline
@@ -634,7 +634,7 @@ Average          & \textbf{71.96} & 68.58\\
 \captionsetup[subfigure]{labelformat=empty}
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 
 \includegraphics[width=0.13775\textwidth]{resources/Human_Poses/results/1/I}
@@ -670,7 +670,7 @@ Average          & \textbf{71.96} & 68.58\\
 
 
 \caption{Qualitative Results. Ground-truth and estimated deformation-free coordinates and  landmarks obtained from DenseReg and DenseReg+MDM are presented. Estimated landmarks(blue), ground-truth(green), lines between estimated and ground-truth landmarks(red).}
-\label{fig:qualitative}
+\label{fig:qualitative_densereg}
 
 \end{figure}
 
@@ -691,7 +691,7 @@ Average          & \textbf{71.96} & 68.58\\
 
 DenseReg can be readily used for the task of facial landmark localization on static images. Given the landmarks' locations on the template shape, it is straightforward to estimate the closest points in the deformation-free coordinates on the images. The local minima of the Euclidean distance between the estimated coordinates and the landmark coordinates are considered as detected landmarks. In order to find the local minima, we simply analyze the connected components separately. Even though more sophisticated methods for covering ``touching shapes'' can be used, we found that this simplistic approach is sufficient for the task. 
 
-Note that the closest deformation-free coordinates among all \emph{visible} pixels to a landmark point is not necessarily the correct corresponding landmark. This phenomenon is called ``landmark marching''~\cite{zhu2015high} and mostly affects the jaw landmarks which are dependent on changes in head pose. It should be noted that we do not use any explicit supervision for landmark detection nor focus on ad-hoc methods to cope with this issue. Errors on jaw landmarks due to invisible coordinates and improvements thanks to deformable models can be observed in Fig.~\ref{fig:qualitative}.
+Note that the closest deformation-free coordinates among all \emph{visible} pixels to a landmark point is not necessarily the correct corresponding landmark. This phenomenon is called ``landmark marching''~\cite{zhu2015high} and mostly affects the jaw landmarks which are dependent on changes in head pose. It should be noted that we do not use any explicit supervision for landmark detection nor focus on ad-hoc methods to cope with this issue. Errors on jaw landmarks due to invisible coordinates and improvements thanks to deformable models can be observed in Fig.~\ref{fig:qualitative_densereg}.
 
 Herein, we evaluate the landmark localization performance of DenseReg as well as the performance obtained by employing DenseReg as an initialization for deformable models~\cite{papandreou2008adaptive,tzimiropoulos2014gauss,antonakos2015feature,trigeorgis2016mnemonic} trained for the specific task. In the second scenario, we provide a slightly improved initialization with very small computational cost by reconstructing the detected landmarks with a PCA shape model that is constructed from ground-truth annotations. 
 
@@ -705,7 +705,7 @@ We greatly outperform all competitors by a large margin. It should be noted that
 Even though both DenseReg and MDM are based on convolutional architectures DenseReg plus MDM is not a fully end-to-end trainable architecture. On the other hand the proposed DenseReg cascade architecture is a end-to-end trainable. It is evident Table \ref{tab:300w} that DenseReg cascade largly outperfoms all other tested methods achieving a new performance record for 300W test set. Apart from the accuracy improvement shown by the AUC, we believe that the reported failure rate of $2.67\%$ is remarkable and highlights the robustness of DenseReg.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[h]
+\begin{table}[ht]
 
 \centering
 %\tabcolsep=0.14cm
@@ -741,7 +741,7 @@ DenseReg                                & 0.3605 & 10.83 \\
 \label{sec:exp_deformable_tracking}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \scalebox{0.9}{
 \begin{tabular}{|l|c|c|}
@@ -872,7 +872,7 @@ DenseReg Cascade & \textbf{98.5}  & \textbf{96.4}  & \textbf{92.1}  & \textbf{88
 \end{tabular}
 \end{center}
 \caption{Joints Localisation Accuracy on MPII dataset.}
-\label{tab:mpii}
+\label{tab:mpii_densereg}
 \end{table}
 
 \begin{table}
@@ -893,7 +893,7 @@ DenseReg Cascade& 94.7  & \textbf{93.4}  & \textbf{90.2}  & \textbf{88.2}  & 91.
 \end{tabular}
 \end{center}
 \caption{Joints Localisation Accuracy on LSP dataset.}
-\label{tab:lsp}
+\label{tab:lsp_densereg}
 \end{table}
 
 Since there are no dense correspondence results between a 3D human model and image pixels in literature, we demonstrate the performance of our system through visual results from our test-set partition of the UP dataset in Fig.\ref{fig:DenseReg_Human}. In order to provide quantitative experimental results in the following we evaluate DenseReg cascade architecture for the problem of articulated body pose estimation. 
@@ -909,12 +909,12 @@ Since there are no dense correspondence results between a 3D human model and ima
 \label{fig:DenseReg_Human}
 \end{figure}
 
-\label{sec:pred_mpii_lsp}
+\label{sec:pred_mpii_lsp_densereg}
 \subsubsection{Joints Localisation on MPII \& LSP}
 
-Results reported on MPII are obtained by using the proposed DenseReg cascade architecture. Table \ref{tab:mpii} provides a comparison of the proposed method with the state-of-the-art in MPII, while Table \ref{tab:lsp} provides a comparison with the state-of-the-art on LSP database.
+Results reported on MPII are obtained by using the proposed DenseReg cascade architecture. Table \ref{tab:mpii_densereg} provides a comparison of the proposed method with the state-of-the-art in MPII, while Table \ref{tab:lsp_densereg} provides a comparison with the state-of-the-art on LSP database.
 
-Some qualitative results are collected in Fig~\ref{fig:qualitative} for the test sets of MPII and LSP. Top three rows show joint localization in challenging poses e.g. extreme viewing angles, challenging poses, occlusions, self occlusions and ambiguities. The bottom row demonstrates dense shape correspondence estimated on test images using the DenseReg cascade architecture.
+Some qualitative results are collected in Fig~\ref{fig:qualitative_pose} for the test sets of MPII and LSP. Top three rows show joint localization in challenging poses e.g. extreme viewing angles, challenging poses, occlusions, self occlusions and ambiguities. The bottom row demonstrates dense shape correspondence estimated on test images using the DenseReg cascade architecture.
 
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -928,7 +928,7 @@ We have also performed experiments on the human ear. We employ the $602$ images 
 Quantitative results are detailed in the supplementary material, where we compare DenseReg, DenseReg + AAM and DenseReg + MDM with alternative DPM detector based initializations.  We observe that DenseReg results are highly accurate and clearly outperforms the DPM based alternative even without a deformable model. Examples for dense human ear correspondence estimated by our system  are presented in Fig.~\ref{fig:ears_examples}.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=\linewidth]{resources/Human_Poses/ears3}
 \caption{Exemplar pairs of deformation-free coordinates of dense landmarks on human ear.}
@@ -940,7 +940,7 @@ Quantitative results are detailed in the supplementary material, where we compar
 The deformation-free space for the ear shape template is visualized in Fig.~\ref{fig:earpoints}. The colouring of the qualitative results that are presented in the paper and this supplementary materials document are generated using these coordinates. On Table.\ref{tab:ears}, we provide failure rates and the Area Under Curve(AUC) measures based on the CED curve of the human ear landmark localization experiment, which were not provided in the paper due to space constraints. Further qualitative examples for regressed and ground-truth deformation-free ear coordinates are provided in Fig.~\ref{fig:ears_examples}.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
   \includegraphics[trim={3.1cm 8cm 0.35cm 7.3cm},width=0.7\linewidth]{resources/Human_Poses/EarPoints}
 \caption{ Deformation-free space for the template ear shape. }
@@ -973,7 +973,10 @@ We propose a fully-convolutional regression approach for establishing dense corr
 Furthermore, we unify the problems of dense shape regression and articulated pose of estimation of deformable objects, by proposing the first, to the best of our knowledge, end-to-end trainable architecture that performance dense shape estimation and face landmark/body part localization. Throughout the paper, we focus on face and body shapes, where applications are abundant and benchmarks allow a fair comparison. We show that using our dense regression method out-of-the-box  outperforms a state-of-the-art semantic segmentation approach for the task of face-part segmentation, while when used as an initialisation for SDMs,  we obtain the state-of-the-art results on the challenging 300W landmark localization challenge. We demonstrate the generality of our method by performing experiments on the human body and human ear shapes. We believe that our method will find ubiquitous use, since it can be readily used for face-related tasks and can be easily integrated into many other correspondence problems.
 
 \section{Network Structure for Hourglass-type DenseReg}
-\begin{figure}[!h]
+
+Figure\ref{fig:hourglass_arch} demonstrated the hourglass architecture \cite{newell2016stacked} we used with some modifications. The network is consisted by three type of modules: 1) the convolution module (blue), 2) the down sampling module (read) and 3) the up sampling module. The whole hourglass is constructed with a list convolution modules at 4 different scales with corresponding down/up sampling modules between those convolution modules. There are also bilateral connection between layers of the same scale. The composition of each type of modules are shown in the figure too. The down sampling module is just a $3\times3$ max pooling layer and the up sampling module is using a $3\times3$ atrous layer following by a $3\times3$ convolution layer. The majority of the parameters are lies in the convolution module. The original hourglass uses a chain of 3 convolution layers as its convolution module, while replacing that with the inception-v2 type module shows slight improvement on body pose estimation and obvious improvement on training speed.
+
+\begin{figure}[ht]
 \centering
 \includegraphics[width=\linewidth]{resources/Human_Poses/hourglass_archietecture}
 \caption{Hourglass architecture with inception-v2 module.}
@@ -981,4 +984,3 @@ Furthermore, we unify the problems of dense shape regression and articulated pos
 
 \end{figure}
 
-Figure\ref{fig:hourglass_arch} demonstrated the hourglass architecture \cite{newell2016stacked} we used with some modifications. The network is consisted by three type of modules: 1) the convolution module (blue), 2) the down sampling module (read) and 3) the up sampling module. The whole hourglass is constructed with a list convolution modules at 4 different scales with corresponding down/up sampling modules between those convolution modules. There are also bilateral connection between layers of the same scale. The composition of each type of modules are shown in the figure too. The down sampling module is just a $3\times3$ max pooling layer and the up sampling module is using a $3\times3$ atrous layer following by a $3\times3$ convolution layer. The majority of the parameters are lies in the convolution module. The original hourglass uses a chain of 3 convolution layers as its convolution module, while replacing that with the inception-v2 type module shows slight improvement on body pose estimation and obvious improvement on training speed.

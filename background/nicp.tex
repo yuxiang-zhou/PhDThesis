@@ -103,7 +103,7 @@ where $X$ can be solved directly by setting the derivative of $E(X)$ to zero. So
 X=(A^TA)^{-1}A^TB
 \end{equation}
 which simply is the product of pseudo-inverse of matrix $A$ and matrix $B$. Therefore in each step, the deformation can be found directly for fixed $\alpha$ and $\beta$. Since landmark term is optional, the final algorithm considers only varying stiffness weighting. Pseudo code are shown below \cite{Amberg2007}:
-\begin{algorithm}[h]
+\begin{algorithm}[ht]
 \caption{Non-rigid Iterative Closest Point Algorithm}
 \label{alg:nicp}
 Initialise $X^0$ as identical transformation\;
