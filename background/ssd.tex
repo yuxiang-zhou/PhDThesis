@@ -1,6 +1,6 @@
 \section{Supervised Descent Methods (SDM)}
 \label{sec:SSD}
-As section \ref{sec:bg_aam} briefly discussed, Newton's descent method played an important role in optimising non-linear cost functions. It is widely used as the second order descent methods approach are considered robust, fast and reliable for nonlinear optimization \cite{Xiong2013}. However few major disadvantages affect second order descent methods: (1) Function might not be analytical differentiable. (2) Hessian might be computational intensive to calculate. (3) Hessian might not be positive semidefinite, in other word the function might not be convex. (4) Functions required to be twice-differentiable.
+As section \ref{sec:bg_aam} briefly discussed, Newton's descent method played an important role in optimising non-linear cost functions. It is widely used as the second order descent methods approach are considered robust, fast and reliable for nonlinear optimization~\cite{Xiong2013}. However few major disadvantages affect second order descent methods: (1) Function might not be analytical differentiable. (2) Hessian might be computational intensive to calculate. (3) Hessian might not be positive semidefinite, in other word the function might not be convex. (4) Functions required to be twice-differentiable.
 
 Supervised Descent Method (SDM) are used to replace Gauss-Newton optimization. SDM proposed the idea that descent method directions can be supervisory trained, which leads to significantly reduce in computational cost since calculation of Jacobian, especially Hessian matrices is avoid. In training phase, supervised descent method learns a set of descent directions that minimise mean of nonlinear least square error functions at sampled points. In testing phase, the error function are optimised with pre-trained descent directions without computing Jacobian or Hessian.
 
@@ -13,7 +13,7 @@ Supervised Descent Method (SDM) are used to replace Gauss-Newton optimization. S
 
 \subsection{SDM Algorithms}
 \label{sec:SDMs}
-For any given image $d \in R^{m}$ having $m$ pixels with corresponding $p$ landmarks $d(x) \in R^{p}$, feature extracted image at lanmark points is defined as $h(d(x)) \in R^{128p}$. Features e.g. Histograms of Oriented Gradients (HoGs) and Scale Invariant Feature Transform (SIFT) \cite{Dalal2005,SIFT} are chosen due to they are robust representations agains noise arnd artifacts. Generally, an image alignment algorithm are defined \cite{Xiong2013}:
+For any given image $d \in R^{m}$ having $m$ pixels with corresponding $p$ landmarks $d(x) \in R^{p}$, feature extracted image at lanmark points is defined as $h(d(x)) \in R^{128p}$. Features e.g. Histograms of Oriented Gradients (HoGs) and Scale Invariant Feature Transform (SIFT)~\cite{Dalal2005,SIFT} are chosen due to they are robust representations agains noise arnd artifacts. Generally, an image alignment algorithm are defined~\cite{Xiong2013}:
 \begin{equation}
 \label{eq:ssdnd}
 f(x_{k+1})=||h(d(x_k+\delta x))-\Phi_*||^2_2

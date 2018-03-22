@@ -1,6 +1,6 @@
 \section{Active Appearance Model (AAM)}
 \label{sec:bg_aam}
-An Active Appearance Model (AAM) is a combination of linear statistical shape and appearance model with corresponding fitting algorithms \cite{Matthews2004, Cootes2001}. AAM separate that model in two parts, shape model and appearance model. 
+An Active Appearance Model (AAM) is a combination of linear statistical shape and appearance model with corresponding fitting algorithms~\cite{Matthews2004, Cootes2001}. AAM separate that model in two parts, shape model and appearance model. 
 
 \subsection{Shape Model}
 Shapes are defined as vertexes of a mesh. A shape model is a function that can express arbitrary shapes by using a base shape plus a linear combination of shape vectors. Mathematical definition of shape model shown below:
@@ -55,7 +55,7 @@ Based on the assumption of basis vector $A_i$ are orthonormal, $\lambda$ can be 
 \end{equation}
 
 \subsection{Image Alignment}
-Minimising equation \ref{eq:minimisep} also referenced as Image Alignment. The purpose of image alignment is finding constant template image in given input image \cite{Matthews2004}. 
+Minimising equation \ref{eq:minimisep} also referenced as Image Alignment. The purpose of image alignment is finding constant template image in given input image~\cite{Matthews2004}. 
 
 \subsubsection{Lucas-Kanada Algorithm}
 Using gradient descent method for image alignment was first introduced by Lucas Kanada by minimising square error between two images which having same form as equation \ref{eq:minimisep}. Solving $p$ is a nonlinear process as pixel value of an image generally unrelated to pixel coordinate. Lucas Kanada make the problem linear by solving the problem with an incremental parameter $\delta p$ with assumption that initial value of $p$ is known. Thus the problem can be solved iteratively for $\delta p$. Equation \ref{eq:minimisep} can now be solved with respect to $\delta p$ as:
@@ -84,7 +84,7 @@ However, Lucas-Kanada Gaussian-Newton descent is slow due to computational inten
 
 \subsubsection{Forwards Compositional Algorithm}
 \label{sec:fca}
-Instead of updating $p$ from estimated $\delta p$ iteratively, \cite{Matthews2004} mentioned compositional algorithms of updating warp transformation. The cost function are:
+Instead of updating $p$ from estimated $\delta p$ iteratively,~\cite{Matthews2004} mentioned compositional algorithms of updating warp transformation. The cost function are:
 \begin{equation}
 \label{eq:forwardcomposition}
 ||A_0(x)-I(W(W(x;\delta p);p))||^2
@@ -101,7 +101,7 @@ Applying Taylor expansion on equation \ref{eq:forwardcomposition} gives:
 where $W(x;0)$ is the identical warp that $W(x;0) = x$. Comparing with equation \ref{eq:minimisedptaylor}, image gradient is now computed for $I(W(x;p))$. The key improvement is that update of warp is evaluation with respect to $p=0$ therefore Jacobian is now computed at $(x;0)$. Thus a constant Jacobian through all iterations so can be precomputed.
 
 \subsubsection{Inverse Compositional Algorithm}
-Inverse Compositional Algorithm are based on Forwards Compositional Algorithm that the purpose of template image $A_0(x)$ and input image $I$ are inversed to further improve performance by precomputing $\delta p$ and Hessian matrix \cite{Matthews2004}. Cost function for inverse compositional algorithm are:
+Inverse Compositional Algorithm are based on Forwards Compositional Algorithm that the purpose of template image $A_0(x)$ and input image $I$ are inversed to further improve performance by precomputing $\delta p$ and Hessian matrix~\cite{Matthews2004}. Cost function for inverse compositional algorithm are:
 \begin{equation}
 \label{eq:inversecomposition}
 ||I(W(x;p))-A_0(W(x;\delta p))||^2
@@ -147,4 +147,4 @@ Compute Hessian matrix $H$\;
 \end{algorithm}
 
 
-% AAM is trained using a set of images where each image contains clear annotated images using same number of landmarks. Shape model is trained using landmark coordinates before applying PCA on shapes to produce a mean shape with some eigenvectors to control the deformation of mean shape. For training appearance model, training images are warped to a reference frame, which contains landmarks of mean shape, so we have different objects with same shape but different texture. Then PCA is used again applying on the warped images to generate mean appearance with eigenvectors controlling variations of texture. Fitting an AAM model to a new image is using Lucas Kanade Alternating Inverse Composition algorithm which is clearly explained in references \cite{Matthews}.
+% AAM is trained using a set of images where each image contains clear annotated images using same number of landmarks. Shape model is trained using landmark coordinates before applying PCA on shapes to produce a mean shape with some eigenvectors to control the deformation of mean shape. For training appearance model, training images are warped to a reference frame, which contains landmarks of mean shape, so we have different objects with same shape but different texture. Then PCA is used again applying on the warped images to generate mean appearance with eigenvectors controlling variations of texture. Fitting an AAM model to a new image is using Lucas Kanade Alternating Inverse Composition algorithm which is clearly explained in references~\cite{Matthews}.

@@ -1,4 +1,5 @@
 \chapter{Dense Pose Estimation and Generation ``in-the-wild''}
+\minitoc
 
 \section{Datasets}
 
@@ -14,7 +15,7 @@
 
 In this work we explore the use of shape-based representations as an auxiliary source of supervision for pose estimation and action recognition. We show that shape-based representations  can act as a source of `privileged information' that complements and extends the pure landmark-level annotations. We explore 2D shape-based supervision signals, such as Support Vector Shape. Our experiments show that shape-based supervision signals substantially improve pose alignment accuracy in the form of a cascade architecture. We outperform state-of-the-art methods on the MPII and LSP datasets, while using substantially shallower networks. For action localization in untrimmed videos, our method introduces additional classification signals based on the structured segment networks (SSN) and further improved the performance. To be specific, dense human pose and landmarks localization signals are involved in detection progress. We applied out network to all frames of videos alongside with output from SSN to further improve detection accuracy, especially for pose related and sparsely annotated videos. The method in general achieves state-of-the-art performance on Activity Detection Task for ActivityNet Challenge2017 test set and witnesses remarkable improvement on pose related and sparsely annotated categories e.g. sports.
 
-Activity Detection and temporal action localization \cite{zhao2017temporal,xu2017r,shou2017cdc,simonyan2014two,jiang2014thumos,caba2015activitynet,shou2016temporal} has drawn increasing attention to the research community in past few years. Human activity understanding in untrimmed and long videos, especially, are crucial part of real-word applications including video recommendation, video surveillance, human-machine interaction and many others. It is of importance for algorithms to determining not only actions contained in videos but also temporal boundaries (activity starting/ending frames).
+Activity Detection and temporal action localization~\cite{zhao2017temporal,xu2017r,shou2017cdc,simonyan2014two,jiang2014thumos,caba2015activitynet,shou2016temporal} has drawn increasing attention to the research community in past few years. Human activity understanding in untrimmed and long videos, especially, are crucial part of real-word applications including video recommendation, video surveillance, human-machine interaction and many others. It is of importance for algorithms to determining not only actions contained in videos but also temporal boundaries (activity starting/ending frames).
 
 However, many methods are trained on short video clips where actions are tightly cropped, while, in practical, videos tend to be long and untrimmed. Also, spatial attentions for human poses are often neglected. The current methods of choice for human pose estimation are Deep Convolutional Neural Network (DCNNs). The general architecture applied for the task involves finding the parameters of a DCNN, which maps the image pixels to the locations of the body-parts. Recently, in order to incorporate contextual information in a better manner, cascade structures are proposed. In these cascade structures instead of regressing directly to part locations, fully convolutional networks are trained that output part detection heatmaps by representing each part using a circle/disc of a particular radius. Then, regression is performed on these heatmaps. The circle/disc representation could be sub-optimal for describing the parts, as well as the human body shape.
 
@@ -26,7 +27,7 @@ However, many methods are trained on short video clips where actions are tightly
 \label{fig:FrontPage}
 \end{figure}
 
-Driven by ActivityNet \cite{caba2015activitynet}, a large-scale video benchmark for human activity understanding is released to the research community and consist of 200 activity categories, in which each contains 100 videos collected ``in-the-wild''. This dataset brought notable challenges to existing state-of-the-art approaches. In this paper, we integrated spacial attentions from human detection and dense human poses to further improve accuracy of both pose alignment and action localization. The contributions can be summarize as following: 
+Driven by ActivityNet~\cite{caba2015activitynet}, a large-scale video benchmark for human activity understanding is released to the research community and consist of 200 activity categories, in which each contains 100 videos collected ``in-the-wild''. This dataset brought notable challenges to existing state-of-the-art approaches. In this paper, we integrated spacial attentions from human detection and dense human poses to further improve accuracy of both pose alignment and action localization. The contributions can be summarize as following: 
 \begin{itemize}
 \item  We propose a better way to use the contextual, as well as the body shape information by learning heatmaps that correspond to the support vector description of human body shape. We demonstrate that by using the proposed representation we train DCNNs that not only achieve state-of-the-art performance for body-part detection but also can recover the shape of the body as a whole.
 
@@ -35,7 +36,7 @@ Driven by ActivityNet \cite{caba2015activitynet}, a large-scale video benchmark 
 \end{itemize}
 
 \section{Dense Body Pose Estimation Networks}
-Our work in dense body pose estimation networks are inspired by learning with `Privileged Information' \cite{VapnikV09,david16,ChenJFY17,zhou2016estimating}, where it is argued that one can simplify training through the use of an `Intelligent Teacher' that in a way explains the supervision signal, rather than simply penalizing misclassifications. This technique was recently used in deep learning for the task of image classification \cite{ChenJFY17}. It shows that shape-based representations provide an excellent source of privileged information for human pose estimation. This additional information is only available during training, only serves as a means of simplifying the training problem, and only requires landmark-level annotations, as all current methods do. Another way of stating this is that we use shape-based representations to construct a set of auxiliary tasks that accelerate and improve the training of pose estimation networks. Additional dense supervision signals used in action detection task are Support Vector Shape (SVS) \cite{van2013support}.
+Our work in dense body pose estimation networks are inspired by learning with `Privileged Information'~\cite{VapnikV09,david16,ChenJFY17,zhou2016estimating}, where it is argued that one can simplify training through the use of an `Intelligent Teacher' that in a way explains the supervision signal, rather than simply penalizing misclassifications. This technique was recently used in deep learning for the task of image classification~\cite{ChenJFY17}. It shows that shape-based representations provide an excellent source of privileged information for human pose estimation. This additional information is only available during training, only serves as a means of simplifying the training problem, and only requires landmark-level annotations, as all current methods do. Another way of stating this is that we use shape-based representations to construct a set of auxiliary tasks that accelerate and improve the training of pose estimation networks. Additional dense supervision signals used in action detection task are Support Vector Shape (SVS)~\cite{van2013support}.
 
 \subsection{Support Vector Shapes (SVS)}
 \label{sec:svs}
@@ -53,14 +54,14 @@ Our work in dense body pose estimation networks are inspired by learning with `P
 \label{fig:svs}
 \end{figure}
 
-A Support Vector Shape (SVS) is a decision function trained on binary shapes using Support Vector Machines (SVMs) with Radial Basis Function (RBF) kernels \cite{Nguyen2013} - a shape is represented in terms of the classifier's response on the plane. This representation can be applied to both sparse landmark points and curves,  fuses inconsistent landmarks into consistent and directly comparable decision functions, and is  robust against noise, missing data, self-occlusions and outliers.
+A Support Vector Shape (SVS) is a decision function trained on binary shapes using Support Vector Machines (SVMs) with Radial Basis Function (RBF) kernels~\cite{Nguyen2013} - a shape is represented in terms of the classifier's response on the plane. This representation can be applied to both sparse landmark points and curves,  fuses inconsistent landmarks into consistent and directly comparable decision functions, and is  robust against noise, missing data, self-occlusions and outliers.
 
-The annotations for all training images are densely sampled to yield a set of landmarks per image.  SVM training proceeds by assigning landmarks  to the `positive' class and randomly sampled points around them are assigned as belonging to the `negative' class. SVMs with RBF kernel functions can map any number of data points onto an infinite-dimensional space where positive and negative points are linearly separable, hence the classification boundary on the 2D space represents the actual shape of the object. As in \cite{Nguyen2013} we use class-specific losses to accommodate the positive/negative class imbalance problem. 
+The annotations for all training images are densely sampled to yield a set of landmarks per image.  SVM training proceeds by assigning landmarks  to the `positive' class and randomly sampled points around them are assigned as belonging to the `negative' class. SVMs with RBF kernel functions can map any number of data points onto an infinite-dimensional space where positive and negative points are linearly separable, hence the classification boundary on the 2D space represents the actual shape of the object. As in~\cite{Nguyen2013} we use class-specific losses to accommodate the positive/negative class imbalance problem. 
 We extend the SVS representation to support also the case where multiple parts are annotated. It can provide further guidance on the estimation of dense shape correspondences for various object classes. In the case of human poses, a coarse to fine representation of a 7-channel SVS are defined as in Figure \ref{fig:svs}. 
 
 \subsection{Network Architecture}
 
-This section provides some details regarding our network architecture used to perform prediction of body poses and landmarks. In particular, we built our architecture based on the stacked hourglass networks, which is originally proposed in \cite{newell2016stacked}. It consists of a series of convolutions and down sampling, followed by a series of convolutions and up sampling, interleaved with skip connections that add back features from high resolutions. The symmetric shape of the network resembles a “hourglass”, hence the name.
+This section provides some details regarding our network architecture used to perform prediction of body poses and landmarks. In particular, we built our architecture based on the stacked hourglass networks, which is originally proposed in~\cite{newell2016stacked}. It consists of a series of convolutions and down sampling, followed by a series of convolutions and up sampling, interleaved with skip connections that add back features from high resolutions. The symmetric shape of the network resembles a “hourglass”, hence the name.
 
 In the stacked hourglass paper the best body pose estimation results have been achieved by using 8 hourglass networks stacked together. In our architecture, instead of 8, only 2 hourglasses are stacked. The first hourglass is used to regress to dense shape information while the second one takes as input the image and the privileged information and regresses to landmark locations. Regarding loss function, we used pixel-wise $\ell_1$ smooth loss for regressing to SVS signals that has continuous values.
 
@@ -121,10 +122,10 @@ In the stacked hourglass paper the best body pose estimation results have been a
  &\textbf{Head}   & \textbf{Shoulder} & \textbf{Elbow} & \textbf{Wrist} & \textbf{Hip}   & \textbf{Knee} & \textbf{Ankle} & \textbf{Total} & \textbf{AUC} \\
 \hline\hline
 % Chu et al., CVPR'17           & 98.5  & 96.3  & 91.9  & 88.1  & 90.6  & 88.0 & 85.0 & 91.5 & 63.8 \\
-Newell et al., ECCV'16 \cite{newell2016stacked}       & 98.2  & 96.3  & 91.2  & 87.1  & \textbf{90.1}  & 87.4 & 83.6 & 90.9 & \textbf{62.9} \\
-Bulat\&Tzimiropoulos, ECCV'16 \cite{bulat2016human} & 97.9  & 95.1  & 89.9  & 85.3  & 89.4  & 85.7 & 81.7 & 89.7 & 59.6 \\
-Wei et al., CVPR'16 \cite{wei2016convolutional}          & 97.8  & 95.0  & 88.7  & 84.0  & 88.4  & 82.8 & 79.4 & 88.5 & 61.4 \\
-Pishchulin et al., CVPR'16 \cite{pishchulin16cvpr}   & 94.1  & 90.2  & 83.4  & 77.3  & 82.6  & 75.7 & 68.6 & 82.4 & 56.5 \\
+Newell et al., ECCV'16~\cite{newell2016stacked}       & 98.2  & 96.3  & 91.2  & 87.1  & \textbf{90.1}  & 87.4 & 83.6 & 90.9 & \textbf{62.9} \\
+Bulat\&Tzimiropoulos, ECCV'16~\cite{bulat2016human} & 97.9  & 95.1  & 89.9  & 85.3  & 89.4  & 85.7 & 81.7 & 89.7 & 59.6 \\
+Wei et al., CVPR'16~\cite{wei2016convolutional}          & 97.8  & 95.0  & 88.7  & 84.0  & 88.4  & 82.8 & 79.4 & 88.5 & 61.4 \\
+Pishchulin et al., CVPR'16~\cite{pishchulin16cvpr}   & 94.1  & 90.2  & 83.4  & 77.3  & 82.6  & 75.7 & 68.6 & 82.4 & 56.5 \\
 \hline
 Our Model                     & \textbf{98.4}  & \textbf{96.4}  & \textbf{92.0}  & \textbf{87.9}  & 89.5  & \textbf{88.4} & \textbf{85.1} & \textbf{91.4} & 62.7 \\
 \hline
@@ -140,10 +141,10 @@ Our Model                     & \textbf{98.4}  & \textbf{96.4}  & \textbf{92.0} 
 \hline
  &\textbf{Head}   & \textbf{Shoulder} & \textbf{Elbow} & \textbf{Wrist} & \textbf{Hip}   & \textbf{Knee} & \textbf{Ankle} & \textbf{Total} & \textbf{AUC} \\
 \hline\hline
-Pishchulin et., ICCV2013 \cite{pishchulin2013poselet} & 87.2  & 56.7  & 46.7  & 38.0  & 61.0  & 57.5 & 52.7 & 57.1 & 35.8\\
-Wei et al., CVPR2016 \cite{wei2016convolutional} & \textbf{97.8}  & 92.5  & 87.0  & 83.9  & 91.5  & 90.8 & 89.9 & 90.5 & 65.4\\
-Bulat\&Tzimiropoulos, ECCV2016 \cite{bulat2016human}& 97.2  & 92.1  & 88.1  & 85.2  & 92.2  & 91.4 & 88.7 & 90.7 & 63.4\\
-Insafutdinov et al., ECCV16 \cite{insafutdinov16ariv}& 97.4  & 92.7  & 87.5  & 84.4  & 91.5  & 89.9 & 87.2 & 90.1 & 66.1\\
+Pishchulin et., ICCV2013~\cite{pishchulin2013poselet} & 87.2  & 56.7  & 46.7  & 38.0  & 61.0  & 57.5 & 52.7 & 57.1 & 35.8\\
+Wei et al., CVPR2016~\cite{wei2016convolutional} & \textbf{97.8}  & 92.5  & 87.0  & 83.9  & 91.5  & 90.8 & 89.9 & 90.5 & 65.4\\
+Bulat\&Tzimiropoulos, ECCV2016~\cite{bulat2016human}& 97.2  & 92.1  & 88.1  & 85.2  & 92.2  & 91.4 & 88.7 & 90.7 & 63.4\\
+Insafutdinov et al., ECCV16~\cite{insafutdinov16ariv}& 97.4  & 92.7  & 87.5  & 84.4  & 91.5  & 89.9 & 87.2 & 90.1 & 66.1\\
 \hline
 Our Model& 95.8  & \textbf{95.8}  & \textbf{94.9}  & \textbf{92.3}  & \textbf{95.2}  & \textbf{96.6} & \textbf{95.7} & \textbf{95.2} & \textbf{69.6}\\
 \hline
@@ -180,13 +181,13 @@ The task for activity detection is to localize the temporal boundary of an activ
 Our methods are focused on determine accurate short activity boundary by incorporating attentions from human detector, poses landmark localization and pose segmentation with activity and completeness classifiers from SSN. 
 
 \subsection{Structured Segment Networks (SSN)}
-The SSN network \cite{zhao2017temporal} relies on a proposal method (described in section \ref{sec:activity_detection}) to produce a set of temporal proposals of varying duration, where each proposal comes with a starting and an ending time. Given an input video, a temporal pyramid will be constructed upon each temporal proposals. One proposal is divided into three stages namely \textit{starting}, \textit{course}, and \textit{ending}. In additional to the \textit{course} stage, another level of pyramid with two sub-parts is constructed. To form the global region representations, features from DCNNs are pooled within these five parts and concatenated together. The activity classifier and the completeness classifier operate on the the region representations to produce activity probability and class conditional completeness probability. The final probability of the proposal being positive instance is decided by the joint probability from these two classifiers.
+The SSN network~\cite{zhao2017temporal} relies on a proposal method (described in section \ref{sec:activity_detection}) to produce a set of temporal proposals of varying duration, where each proposal comes with a starting and an ending time. Given an input video, a temporal pyramid will be constructed upon each temporal proposals. One proposal is divided into three stages namely \textit{starting}, \textit{course}, and \textit{ending}. In additional to the \textit{course} stage, another level of pyramid with two sub-parts is constructed. To form the global region representations, features from DCNNs are pooled within these five parts and concatenated together. The activity classifier and the completeness classifier operate on the the region representations to produce activity probability and class conditional completeness probability. The final probability of the proposal being positive instance is decided by the joint probability from these two classifiers.
 
 \subsection{Temporal Region Proposal}
-An input video is divided to 20 snippets and temporal region are generated based on sliding windows \cite{shou2016temporal, yuan2016temporal}. A sliding window of size 3 are selected so 18 region proposals are generated. As we incorporated human detector \cite{zeng2016crafting}, dense pose estimation and alignment as additional feature, existing proposed regions will be duplicated if the human pose detector returns multiple entries. For each proposed region,  K-level temporal pyramid where each level dividing the region into smaller parts.
+An input video is divided to 20 snippets and temporal region are generated based on sliding windows~\cite{shou2016temporal, yuan2016temporal}. A sliding window of size 3 are selected so 18 region proposals are generated. As we incorporated human detector~\cite{zeng2016crafting}, dense pose estimation and alignment as additional feature, existing proposed regions will be duplicated if the human pose detector returns multiple entries. For each proposed region,  K-level temporal pyramid where each level dividing the region into smaller parts.
 
 \subsection{Temporal Region Classifiers}
-Structured temporal pyramid pooling \cite{zhao2017temporal} is performed to extract global features in which our detection, pose estimation and segmentation are involved. The training and testing of the classifiers are following the SSN network in similar manner.
+Structured temporal pyramid pooling~\cite{zhao2017temporal} is performed to extract global features in which our detection, pose estimation and segmentation are involved. The training and testing of the classifiers are following the SSN network in similar manner.
 
 Two types of linear classifiers (activity classifier and completeness classifier) are implemented on top of high-level features. Given a proposal, the activity classifier will produce a vector of normalized responses via a softmax layer which represents conditional distribution $P(c_i|p_i)$ where $c_i$ is class label and $p_i$ represents given proposal. The completeness classifier $C_k$ are trained for every activity class $k$. It can be expressed as $P(b_i|c_i,p_i)$ where $b_i$ is binary indicator of the completeness of given region $p_i$. Outputs of both formed a joint distribution so the loss function is defined as: 
 $$Loss=-log P(c_i|p_i)-1_{(c_i>1)}P(b_i|c_i,p_i)$$
@@ -207,7 +208,7 @@ where completeness term is active only when class label is not background.
 
 \subsection{Joints Localization on MPII \& LSP}
 
-\noindent\textbf{Databases} The experiments outlined in this section are performed on two well known body pose databases: MPII Human Pose \cite{andriluka20142d} and Leeds Sport Poses (LSP) + extended training set \cite{Johnson10}. There are around 18k training images and 7k testing images involved in MPII. In section \ref{sec:signals}, we split training set randomly to make a 3k size validation set while the rest are used for training. In section \ref{sec:pred_mpii_lsp}, the same 15k training set are used for training and reporting results of MPII. Results on LSP are reported by fine tuning the same model with the 11k extended LSP training set.
+\noindent\textbf{Databases} The experiments outlined in this section are performed on two well known body pose databases: MPII Human Pose~\cite{andriluka20142d} and Leeds Sport Poses (LSP) + extended training set~\cite{Johnson10}. There are around 18k training images and 7k testing images involved in MPII. In section \ref{sec:signals}, we split training set randomly to make a 3k size validation set while the rest are used for training. In section \ref{sec:pred_mpii_lsp}, the same 15k training set are used for training and reporting results of MPII. Results on LSP are reported by fine tuning the same model with the 11k extended LSP training set.
 
 \noindent\textbf{Evaluation Metrics} The accuracy reported follow the Percentage Correct Keypoints (PCK) measurement on LSP dataset. Normalized PCK measurement by the scale of head (PCKh) is used for MPII on both validation and test set. Note that the performance gap between validation and test set is due to the use of invisible parts in measuring the performance. That is, in the validation set we measured the performance making use of the invisible parts, while the test set protocol of MPII does not use the invisible parts when computing the evaluation metrics.
 
@@ -229,10 +230,10 @@ The results of our methods on ActivityNet 2017 (test set) are shown in Table \re
   \hline
   Method & Avg. mAP \\
   \hline
-  Wang, R. and Tao, D. \cite{uts2016activitynet} & 14.62 \\
-  Singh, B. and Marks, T. et. al. \cite{singh2016multi} & 16.68 \\
-  Singh, G. and Cuzzolin, F. \cite{singh2016untrimmed} & 17.83 \\
-  Zhao, Y. and Xiong, Y. et. al. \cite{zhao2017temporal} & 28.28 \\
+  Wang, R. and Tao, D.~\cite{uts2016activitynet} & 14.62 \\
+  Singh, B. and Marks, T. et. al.~\cite{singh2016multi} & 16.68 \\
+  Singh, G. and Cuzzolin, F.~\cite{singh2016untrimmed} & 17.83 \\
+  Zhao, Y. and Xiong, Y. et. al.~\cite{zhao2017temporal} & 28.28 \\
   \hline
   Xiong, Y. et. al. [ActivityNet 2017] & 31.863 \\
   Lin, T. et. al. [ActivityNet 2017] & 33.406 \\
@@ -271,8 +272,8 @@ DenseReg code and demonstrations are made available at \url{http://alpguler.com/
 \end{figure}
     
 
-Deep Convolutional Neural Networks CNNs \cite{lecun1998gradient}
-have revolutionized computer vision over the last decade, starting from  image classification \cite{krizhevsky2012imagenet, simonyan2014very, szegedy2015going,he2016deep}, and then moving on to tasks such as object detection \cite{girshick2014rich}, semantic segmentation \cite{long2015fully,chen2016deeplab} and pose estimation \cite{chen2014articulated, tompson2014joint,yang2016end,newell2016stacked}.
+Deep Convolutional Neural Networks CNNs~\cite{lecun1998gradient}
+have revolutionized computer vision over the last decade, starting from  image classification~\cite{krizhevsky2012imagenet, simonyan2014very, szegedy2015going,he2016deep}, and then moving on to tasks such as object detection~\cite{girshick2014rich}, semantic segmentation~\cite{long2015fully,chen2016deeplab} and pose estimation~\cite{chen2014articulated, tompson2014joint,yang2016end,newell2016stacked}.
 The order in which these tasks were successfully tackled can  be associated with the level of spatial detail at which the problem is addressed, starting from boxes, moving on to regions, and eventually getting to the  pixel-level labelling.
 
 In this work we push further the envelope of tasks that can be addressed by CNNs, and consider a task that lies at the end of the `location detail' spectrum.
@@ -280,16 +281,16 @@ In this work we push further the envelope of tasks that can be addressed by CNNs
 We show that  this task can be successfully addressed in an entirely feedforward manner by employing a discriminatively-trained CNN. 
 
 %capture all of the excruciating details underlying image-to-model matching
-%tackle the much more challenging task of establishing a 2D to 3D correspondence {\emph{in the wild}} by leveraging upon recent advances in semantic segmentation \cite{CP2015Semantic}. 
+%tackle the much more challenging task of establishing a 2D to 3D correspondence {\emph{in the wild}} by leveraging upon recent advances in semantic segmentation~\cite{CP2015Semantic}. 
 %one of the most `exchaustively detailed' visual tasks, namely  dense image-to-surface correspondence `in the wild',  
-%semantic segmentation fine-grained categorization \cite{zhang2014part}, among others.
+%semantic segmentation fine-grained categorization~\cite{zhang2014part}, among others.
 %Motivated by the gap between discriminatively trained systems for detection and category-level deformable models, we propose a system that combines the merits of both.
 %Discriminative learning-based approaches typically pursue invariance to shape deformations, for instance by employing  local `max-pooling' operations to ellicit responses that are invariant to {\emph{local}} translations. As such, these models can reliably  detect patterns irrespective of their deformations through efficient, feedforward algorithms. At the same time, however, this discards useful shape-related information and only delivers a single categorical decision per position. 
 %We introduce a discriminatively trained network to obtain, in a fully-convolutional manner, dense correspondences between an input image and a deformation-free template coordinate system. 
 
 In order to accomplish this 
     we exploit the availability of manual landmark annotations ``in-the-wild'' in order to fit a 3D template; this provides us with a dense correspondence field, from the image domain to the 2-dimensional, $U-V$ parameterization of the surface. We then train a fully convolutional network that densely regresses from the image pixels to this $U-V$ coordinate space. This combines the fine-grained discrimative power of statistical deformable models with the ``in the wild'' operation of fully-convolutional neural networks. 
-    We draw inspiration from recent successes of object detection at the task of bounding box regression \cite{ren2015faster}, and 
+    We draw inspiration from recent successes of object detection at the task of bounding box regression~\cite{ren2015faster}, and 
     introduce a method that blends classification and regression to accurately regress the 2D template coordinates of every foreground pixel.
     
     As we show experimentally, the proposed  feedforward architecture outperforms substantially more involved systems developped in particular for facial landmark localization while also outperforming the results of systems trained on lower-granularity tasks, such as facial part segmentation.
@@ -299,10 +300,10 @@ We can also seamlessly integrate this method with iterative, deformable model-ba
 
 
 Furthermore, we show that by exploiting the established dense shape correspondence one can substantially improve the performance of CNNs trained for articulated body pose estimation and facial landmark localization and accelerate their training. 
-In particular, recent CNN-based body and facial pose estimation works  only implicitly capture shape-based e.g. through cascading \cite{newell2016stacked}.  Instead, we further exploit shape for CNN  training by introducing an auxiliary dense correspondence supervision signal that acts like a source  of  `Privileged Information' \cite{VapnikV09,lopez2015unifying,ChenJFY17}.
+In particular, recent CNN-based body and facial pose estimation works  only implicitly capture shape-based e.g. through cascading~\cite{newell2016stacked}.  Instead, we further exploit shape for CNN  training by introducing an auxiliary dense correspondence supervision signal that acts like a source  of  `Privileged Information'~\cite{VapnikV09,lopez2015unifying,ChenJFY17}.
 Our experiments show that the cascading and dense supervision approaches are clearly complementary and can be combined, yielding faster and improved convergence. 
 
-%\footnote{`Privileged Information' was proposed in \cite{VapnikV09} where it is argued that one can simplify training through the use of an `Intelligent Teacher' that in a way explains the supervision signal, rather than simply penalising misclassifications. This technique was recently used in deep learning for the task of image classification \cite{ChenJFY17}.}.
+%\footnote{`Privileged Information' was proposed in~\cite{VapnikV09} where it is argued that one can simplify training through the use of an `Intelligent Teacher' that in a way explains the supervision signal, rather than simply penalising misclassifications. This technique was recently used in deep learning for the task of image classification~\cite{ChenJFY17}.}.
 
 %We note that  this additional information is only available during training,  only serves as a means of simplifying the training problem, and only requires landmark-level annotations, as all current methods do.
 
@@ -318,7 +319,7 @@ In particular, the template coordinates allow us to transfer to an image multipl
 \item We  show that a cascaded architecture that jointly regresses dense correspondences and sparse landmarks leads to improved localization in both articulated body pose estimation and facial landmark localization. 
 \item We  demonstrate the generic nature of the method by applying it to the task of estimating dense correspondence in other object, such as the human ear.
 \end{itemize}
-A preliminary version of the paper has appeared in CVPR 2017 \cite{guler2016densereg}. The present version bears substantial novelties and extended experiments. The most important novelty is the design of end-to-end deep networks for joint dense shape correspondence estimation and articulated body pose estimation, where we demonstrate that dense correspondence largely improves the performance of articulated pose estimation.
+A preliminary version of the paper has appeared in CVPR 2017~\cite{guler2016densereg}. The present version bears substantial novelties and extended experiments. The most important novelty is the design of end-to-end deep networks for joint dense shape correspondence estimation and articulated body pose estimation, where we demonstrate that dense correspondence largely improves the performance of articulated pose estimation.
     
 %\item the design of end-to-end deep networks for joint dense shape correspondence estimation and facial landmark %localisation and tracking.  
 %\end{itemize}
@@ -326,7 +327,7 @@ A preliminary version of the paper has appeared in CVPR 2017 \cite{guler2016dens
 The rest of the manuscript is summarized as follows: In Section \ref{sec:SDMs} we present the idea of establishing dense correspondences between the normalized 3D model space of a deformable object and 2D images. In Section \ref{sec:quantized} we present a deep learning framework for establishing dense correspondences using Deep Convolutional Neural Networks (DCNNs) and in particular a quantized regression approach tailored to the task. In the same section we also present DCNN frameworks for joint articulated pose estimation and dense shape correspondence estimation. We present experiments in Section \ref{sec:experiments} and conclude in Section \ref{S:CONCLUSIONS}.
 
 % Our system is particularly simple to implement, as it relies on a variation of the broadly adopted 
-% Deeplab system \cite{CP2015Semantic}.
+% Deeplab system~\cite{CP2015Semantic}.
     
     
 \section{Previous work}
@@ -338,33 +339,33 @@ the effects of deformations,  SDMs aim at capturing their details; our work aims
 at capitalizing on the power of both approaches.
 
 %A common theme in these works is that DCNNs trained in an end-to-end manner  deliver  strikingly better results than systems relying on carefully engineered features, such as SIFT or HOG features.
-%This success can be partially attributed to the built-in  invariance of DCNNs to local image transformations, which underpins their ability to learn hierarchical abstractions of data \cite{zeiler2014visualizing}. While this invariance is clearly desirable for high-level vision tasks, it can hamper low-level tasks, such as pose estimation  and semantic segmentation - where we want precise localization, rather than abstraction of spatial details.  %% As 
+%This success can be partially attributed to the built-in  invariance of DCNNs to local image transformations, which underpins their ability to learn hierarchical abstractions of data~\cite{zeiler2014visualizing}. While this invariance is clearly desirable for high-level vision tasks, it can hamper low-level tasks, such as pose estimation  and semantic segmentation - where we want precise localization, rather than abstraction of spatial details.  %% As 
 
-In particular, several recent works in deep learning have aimed at enriching deep networks with information about shape by explicitly modelling {\em the effect} of  similarity transformations \cite{PapandreouKS15}
-or non-rigid deformations \cite{JaderbergSZK15,HandaBPSMD16,ChenHW016}; several of these have found success in classification \cite{PapandreouKS15}, fine-grained recognition  \cite{JaderbergSZK15}, and also face detection \cite{ChenHW016}. There are works \cite{lades1993distortion,pedersoli2015elastic} that model the deformation via optimization procedures, whereas we obtain it in a feedforward manner and in a single shot. In these works, shape is treated as a nuisance, while we treat it as the goal in itself. 
-Earlier discriminatively trained models exploited depth data for 3D human body correspondence \cite{TaylorSSF12,WeiHCVL15}, while recent works on 3D surface correspondence \cite{Br1,Br2} have shown the merit of CNN-based unary terms for correspondence. Instead our work relies entirely on RGB inputs.
-Moving beyond discriminatively training, recent work \cite{ThewlisBV17a}  has explored how CNNs can be used for unsupervised non-rigid alignment of images, along the lines of earlier works on congealing \cite{Learned-Miller06,KokkinosY07}. Even though certainly promising, the results are still not directly comparable with the present state-of-the-art on challenging benchmarks.
+In particular, several recent works in deep learning have aimed at enriching deep networks with information about shape by explicitly modelling {\em the effect} of  similarity transformations~\cite{PapandreouKS15}
+or non-rigid deformations~\cite{JaderbergSZK15,HandaBPSMD16,ChenHW016}; several of these have found success in classification~\cite{PapandreouKS15}, fine-grained recognition ~\cite{JaderbergSZK15}, and also face detection~\cite{ChenHW016}. There are works~\cite{lades1993distortion,pedersoli2015elastic} that model the deformation via optimization procedures, whereas we obtain it in a feedforward manner and in a single shot. In these works, shape is treated as a nuisance, while we treat it as the goal in itself. 
+Earlier discriminatively trained models exploited depth data for 3D human body correspondence~\cite{TaylorSSF12,WeiHCVL15}, while recent works on 3D surface correspondence~\cite{Br1,Br2} have shown the merit of CNN-based unary terms for correspondence. Instead our work relies entirely on RGB inputs.
+Moving beyond discriminatively training, recent work~\cite{ThewlisBV17a}  has explored how CNNs can be used for unsupervised non-rigid alignment of images, along the lines of earlier works on congealing~\cite{Learned-Miller06,KokkinosY07}. Even though certainly promising, the results are still not directly comparable with the present state-of-the-art on challenging benchmarks.
 
 Approaches that rely on  Statistical Deformabe Models (SDMs), such as Active Appearance Models (AAMs) or 3D Morphable Models (3DMMs) aim at explicitly recovering  dense correspondences between a deformation-free template and the observed image, rather than trying to discard them. 
 This allows to both represent shape-related information (\textit{e.g.} for facial expression analysis) and also to obtain invariant decisions after registration (\textit{e.g.} for identification). 
-Explicitly representing shape  can have substantial performance benefits, as is witnessed in the majority of facial analysis tasks requiring detailed face information e.g. identification \cite{TaigmanYRW14}, landmark localisation \cite{sagonas2016300}, 3D pose estimation, as well as 3D face reconstruction ``in-the-wild'' \cite{jourabloo2016large}. 
-However alignment-based methods are limited in two respects. Firstly they require an initialization from external systems, which can become increasingly challenging for elaborate SDMs: both AAMs and 3DMMs require at least a bounding box as initialization and 3DMMs may further require position of specific facial landmarks. Furthermore, the problem of fitting a 3DMM of human body is even more challenging requiring further assumptions \cite{lassner2017unite}. In general, SDM fitting  requires iterative, time-demanding optimization algorithms, especially when the initialisation is far from the solution \cite{booth20173d}. The advent of Deep Learning has made it possible to replace the iterative optimization task with iterative regression problems \cite{trigeorgis2016mnemonic}, but this does not alleviate the need for initialization and multiple iterations. 
+Explicitly representing shape  can have substantial performance benefits, as is witnessed in the majority of facial analysis tasks requiring detailed face information e.g. identification~\cite{TaigmanYRW14}, landmark localisation~\cite{sagonas2016300}, 3D pose estimation, as well as 3D face reconstruction ``in-the-wild''~\cite{jourabloo2016large}. 
+However alignment-based methods are limited in two respects. Firstly they require an initialization from external systems, which can become increasingly challenging for elaborate SDMs: both AAMs and 3DMMs require at least a bounding box as initialization and 3DMMs may further require position of specific facial landmarks. Furthermore, the problem of fitting a 3DMM of human body is even more challenging requiring further assumptions~\cite{lassner2017unite}. In general, SDM fitting  requires iterative, time-demanding optimization algorithms, especially when the initialisation is far from the solution~\cite{booth20173d}. The advent of Deep Learning has made it possible to replace the iterative optimization task with iterative regression problems~\cite{trigeorgis2016mnemonic}, but this does not alleviate the need for initialization and multiple iterations. 
 
 Bridges between the detection and SDM-based approaches have often been pursued in the past.
 Shape information has commonly been used in pose estimation in the form of a prior on the relative positions of parts, following the Pictorial Structures model\cite{fischler1973representation}. This is explicitly represented in the form of energy terms in deformable part-based methods
-(DPMs) ~\cite{felzenszwalb2008discriminatively} and related probabilistic graphical model (PGM) approaches to the problem of pose estimation ~\cite{andriluka2009pictorial,sapp2010adaptive,yang2011articulated,sapp2013modec} and face landmark localization \cite{zhu2012face}. Even though CNNs were originally only used as parts of graphical model in \cite{jain2013learning,tompson2014joint,chen2014articulated,yang2016end},  more recently CNN-based architectures have been shown able to exploit shape and context implicitly via  stacked and  learnable part localization operations, through both non-recurrent \cite{wei2016convolutional,bulat2016human,newell2016stacked} and recurrent \cite{belagiannis2016recurrent} refinements. 
+(DPMs) ~\cite{felzenszwalb2008discriminatively} and related probabilistic graphical model (PGM) approaches to the problem of pose estimation ~\cite{andriluka2009pictorial,sapp2010adaptive,yang2011articulated,sapp2013modec} and face landmark localization~\cite{zhu2012face}. Even though CNNs were originally only used as parts of graphical model in~\cite{jain2013learning,tompson2014joint,chen2014articulated,yang2016end},  more recently CNN-based architectures have been shown able to exploit shape and context implicitly via  stacked and  learnable part localization operations, through both non-recurrent~\cite{wei2016convolutional,bulat2016human,newell2016stacked} and recurrent~\cite{belagiannis2016recurrent} refinements. 
 
 Instead, as we show in the following,  the present work shows that a feedforward CNN can jointly deliver detection and landmark localization by the introduction of an appropriate supervision signal, the introduction of a customized regression architecture, and combining dense supervision with modern cascaded architectures. 
 
-Following the deformable template paradigm \cite{yuille1991deformable,Grenander1991}, we consider that object instances are obtained by deforming a prototypical object, or `template', through  dense deformation fields. 
+Following the deformable template paradigm~\cite{yuille1991deformable,Grenander1991}, we consider that object instances are obtained by deforming a prototypical object, or `template', through  dense deformation fields. 
 This makes it possible  to factor  object variability within a category into variations that are associated to  deformations, generally linked to the object's 2D/3D shape, and variations that are associated to appearance (or, `texture' in graphics), e.g. due to facial hair, skin color, or illumination. 
 
-This factorization largely simplifies the  modelling task. SDMs use it as a stepping stone for the construction of parametric models of deformation and appearance. For instance, in AAMs a combination of Procrustes Analysis, Thin-Plate Spline warping and PCA is the standard pipeline for learning a low-dimensional linear subspace that captures category-specific shape variability \cite{cootes2001active}. Even though we have a common starting point, rather than trying to construct a linear generative model of deformations, we treat the image-to-template correspondence as a vector field that our network tries to regress.
+This factorization largely simplifies the  modelling task. SDMs use it as a stepping stone for the construction of parametric models of deformation and appearance. For instance, in AAMs a combination of Procrustes Analysis, Thin-Plate Spline warping and PCA is the standard pipeline for learning a low-dimensional linear subspace that captures category-specific shape variability~\cite{cootes2001active}. Even though we have a common starting point, rather than trying to construct a linear generative model of deformations, we treat the image-to-template correspondence as a vector field that our network tries to regress.
 
 In particular, we start from a template \\
 $\bm{X} = [\bm{x}_1^\top ,\bm{x}_2^\top,...\bm{x}_m^\top]^\top \in \mathbb{R}$, where each $\bm{x}_j \in \mathbb{R}^3$ is a vertex location of the mesh in 3D space. 
 %
-This template could be any facial mesh, but in practice it is most useful to use a topology that is in correspondence with a 3D statistical shape model such as \cite{booth3d2} or \cite{paysan20093d}.
+This template could be any facial mesh, but in practice it is most useful to use a topology that is in correspondence with a 3D statistical shape model such as~\cite{booth3d2} or~\cite{paysan20093d}.
 %
 We compute a bijective mapping $\psi$, from template mesh $\bm{X}$ to the 2D canonical space $\bm{U} \in \mathbb{R}^{2\times m}$, such that  
 %
@@ -376,7 +377,7 @@ We compute a bijective mapping $\psi$, from template mesh $\bm{X}$ to the 2D can
 \subsection{Supervision for the face template}
 \label{sec:quantized}
 We exploit the availability of facial landmark annotations ``in the wild'', to fit the template face to the image by obtaining a coordinate transformation for each vertex $\bm{x}_j$. 
-We use the fittings provided by \cite{zhu2016face} which were fit using a modified 3DMM implementation \cite{romdhani2005estimating}. However, for the purpose of this paper, we require a per-pixel estimate of the location in UV space on our template mesh and thus do not require an estimate of the projection or model parameters as required by other 3D landmark recovery methods \cite{jourabloo2016large,zhu2016face}. The per-pixel UV coordinates are obtained through rasterization of the fitted mesh and non-visible vertices are culled via z-buffering.
+We use the fittings provided by~\cite{zhu2016face} which were fit using a modified 3DMM implementation~\cite{romdhani2005estimating}. However, for the purpose of this paper, we require a per-pixel estimate of the location in UV space on our template mesh and thus do not require an estimate of the projection or model parameters as required by other 3D landmark recovery methods~\cite{jourabloo2016large,zhu2016face}. The per-pixel UV coordinates are obtained through rasterization of the fitted mesh and non-visible vertices are culled via z-buffering.
 
 %
 \begin{figure}
@@ -387,12 +388,12 @@ We use the fittings provided by \cite{zhu2016face} which were fit using a modifi
 \label{fig:GT}
 \end{figure}
 
-The mapping $\psi$ is obtained via the cylindrical unwrapping described in \cite{booth2014optimal}. Thanks to the cylindrical unwrapping, we can interpret these coordinates as being the horizontal and vertical coordinates while moving on the face surface: ${u}_j^h \in [0,1]$ and ${u}_j^v \in [0,1]$. Note that this semantically meaningful parameterization has no effect on the operation of our method.
+The mapping $\psi$ is obtained via the cylindrical unwrapping described in~\cite{booth2014optimal}. Thanks to the cylindrical unwrapping, we can interpret these coordinates as being the horizontal and vertical coordinates while moving on the face surface: ${u}_j^h \in [0,1]$ and ${u}_j^v \in [0,1]$. Note that this semantically meaningful parameterization has no effect on the operation of our method.
 As  illustrated in \ref{fig:GT}, once the transformation from the template face vertices to the morphed vertices is established, the  $\bm{u}_j$ coordinates of each visible vertex on the canonical face can be transferred to the image space. This establishes the ground truth signal for our subsequent regression task.
 
 \subsection{Supervision for the human body template}
 
-We use the recently proposed "Unite the People" (UP) dataset~\cite{lassner2017unite}, which provides a 3D deformable human shape model \cite{loper2015smpl} in correspondence with images from LSP \cite{Johnson10}, MPII~\cite{andriluka14cvpr}, and FashionPose~\cite{dantone2013human} datasets. The dataset is obtained by solving an optimization problem of~\cite{bogo2016keep} to fit the surface given annotated landmarks and manually obtained segmentation masks for human bodies. The fits are filtered through crowdsourcing by manual elimination bad samples resulting into a total of 8515 images.
+We use the recently proposed "Unite the People" (UP) dataset~\cite{lassner2017unite}, which provides a 3D deformable human shape model~\cite{loper2015smpl} in correspondence with images from LSP~\cite{Johnson10}, MPII~\cite{andriluka14cvpr}, and FashionPose~\cite{dantone2013human} datasets. The dataset is obtained by solving an optimization problem of~\cite{bogo2016keep} to fit the surface given annotated landmarks and manually obtained segmentation masks for human bodies. The fits are filtered through crowdsourcing by manual elimination bad samples resulting into a total of 8515 images.
 %
 In order to handle the complex geometry of the human shape, we manually partition the surface into 25 patches each of which is isomorphic to the plane. Each vertex on the mesh is assigned a patch label, $I$. We establish a deformation-free coordinate system for each patch by applying multidimensional-scaling to corresponding vertices. This is followed by a normalization to obtain fields $U,V \in [0,1]$.  The $I$ ,$U$ and $V$ fields on the SMPL model\cite{loper2015smpl} is presented in Fig.~\ref{fig:IUV}.
 %
@@ -425,7 +426,7 @@ Our aim is to estimate at any image pixel that belongs to a face region the valu
 
 One can phrase this problem as a generic regression task and attack it with the powerful machinery of CNNs. Unfortunately, the best performance that we could obtain this way was quite underwhelming, apparently due to the task's complexity. Our approach is to quantize and estimate the quantization error separately for each quantized value. Instead of directly regressing $u$, the quantized regression approach lets us solve a set of easier sub-problems, yielding improved regression results.
 
-In particular,	instead of  using a CNN as a `black box' regressor, we draw inspiration from the success of recent works on semantic part  segmentation \cite{tsogkas2015deep,CP2016Deeplab}, and landmark classification \cite{bulat2016human,bulat2016two}. These works have shown that CNNs can deliver remarkably accurate predictions when trained to predict \textit{categorical variables}, indicating for instance the facial part or landmark corresponding to each pixel. 
+In particular,	instead of  using a CNN as a `black box' regressor, we draw inspiration from the success of recent works on semantic part  segmentation~\cite{tsogkas2015deep,CP2016Deeplab}, and landmark classification~\cite{bulat2016human,bulat2016two}. These works have shown that CNNs can deliver remarkably accurate predictions when trained to predict \textit{categorical variables}, indicating for instance the facial part or landmark corresponding to each pixel. 
     
 Building on these successes, we propose a hybrid method that combines a classification with a regression problem. Intuitively, we first identify a coarser face region that can contain each pixel, and then obtain a refined, region-specific prediction of the pixel's $U-V$  field. As we will describe below, this yields substantial gains in performance when compared to the baseline of a generic regression system. 
 
@@ -442,7 +443,7 @@ We tesselate the template's surface with a cartesian grid, by uniformly and sepa
 
 On Fig.~\ref{fig:DiscreteFaces}, the tesselations of different granularities are visualized. For a sufficiently large value of $K$ even a plain classification result could provide a reasonable estimate of the pixel's correspondence field, albeit with some staircasing effects. The challenge here is that as the granularity of these discrete labels becomes increasingly large, the amount of available training data decreases and label complexity increases. A more detailed analysis on the effect of label-space granularity to segmentation performance is provided in supplementary materials.
 
-We propose to combine powerful classification results with a regression problem that will yield a  refined  correspondence estimate. For this, we compute the residual between the desired and quantized $U-V$  coordinates and add a separate module that tries to regress it. We train a separate regressor per facial region, and at any pixel only penalize the regressor loss for the responsible face region. We can interpret this form as a `hard' version of a mixture of regression experts \cite{JordanJ94}. 
+We propose to combine powerful classification results with a regression problem that will yield a  refined  correspondence estimate. For this, we compute the residual between the desired and quantized $U-V$  coordinates and add a separate module that tries to regress it. We train a separate regressor per facial region, and at any pixel only penalize the regressor loss for the responsible face region. We can interpret this form as a `hard' version of a mixture of regression experts~\cite{JordanJ94}. 
 
 The horizontal and vertical components $u^h,u^v$ of the correspondence field are predicted separately. This results in a substantial reduction in computational and sample complexity -  For $K$ distinct U and V bins we have $K^2$ regions; the classification is obtained by combining 2 $K$-way classifiers. Similarily, the regression mapping involves $K^2$ regions, but only uses $2 K$ one-dimensional regression units. The pipeline for quantized face shape regression is provided in Fig.~\ref{fig:Pipeline}.
 
@@ -476,9 +477,9 @@ Instead of this hard quantization, one can use a soft-quantization using the sof
 \begin{equation}
 \hat{u}^h = \sum_{i=0}^{K-1}  \bigg( \frac{e^{f^{q^h}_i}}{\sum_j e^{f^{q^h}_j}}   \bigg)  ( i \cdot d + \hat{r}^h_{i}),
 \end{equation}
-where $f^{q^h}$ is the output of the CNN branch trained for the quantized ($\hat{q}^h$) field. Notice that this is the \textit{mixture of experts} model, \cite{JordanJ94}, where the soft-quantization is analogous to the output of the gating network. It is straightforward to change our model accordingly: shifting each $\hat{r}^h_{i}$ by adding ($i \cdot d$) to the bias terms of the corresponding $1\times1$  convolutional layer and weighting each 'locally trained regressor' output by the softmax function and summing up. Since the parameters of the adapted network are not exactly optimized for this new soft-quantized model, we resort to end-to-end training. 
+where $f^{q^h}$ is the output of the CNN branch trained for the quantized ($\hat{q}^h$) field. Notice that this is the \textit{mixture of experts} model,~\cite{JordanJ94}, where the soft-quantization is analogous to the output of the gating network. It is straightforward to change our model accordingly: shifting each $\hat{r}^h_{i}$ by adding ($i \cdot d$) to the bias terms of the corresponding $1\times1$  convolutional layer and weighting each 'locally trained regressor' output by the softmax function and summing up. Since the parameters of the adapted network are not exactly optimized for this new soft-quantized model, we resort to end-to-end training. 
 
-After the fine-tuning, the mixture of experts model performs as well as the quantized regression. Since no significant improvement in regression performance is observed, we have not performed any experiments related to facial analysis with this architecture. We consider that this differentiable representation could be more useful for instance as a spatial transformer network \cite{jaderberg2015spatial}, where the deformation field needs to be differentiable. 
+After the fine-tuning, the mixture of experts model performs as well as the quantized regression. Since no significant improvement in regression performance is observed, we have not performed any experiments related to facial analysis with this architecture. We consider that this differentiable representation could be more useful for instance as a spatial transformer network~\cite{jaderberg2015spatial}, where the deformation field needs to be differentiable. 
 
 
 \subsection{Effect of Quantization to Regression Performance}
@@ -522,7 +523,7 @@ On the other hand because body is a highly articulated object, with each part ha
 \subsection{A DenseReg Cascade for end-to-end dense shape regression and articulated pose estimation}
 \label{sec: densereg_cascade}
 
-Current algorithms for landmark localization and human pose estimation commonly address the learning problem in the form of a multi-class classification task, where each landmark defines its own class and the remainder of the image is labelled as background. Even though simple and effective, this training strategy provides a particularly sparse positive supervision signal, which asks a CNN to call everything other than a particular landmark a negative. We can intuitively say that our method simplifies this training `riddle', by providing information about dense correspondence between two surfaces. This fits  with the `Privileged Information' paradigm of  \cite{VapnikV09} where an `Intelligent Teacher' provides additional information during training that helps `understand' why a given  decision is taken. As a simple example, classifying a pixel as being a `knee' landmark can potentially be assisted by having dense correspondence maps, that  help the network solve the problem in a coarse-to-fine manner. Rather than rely on semantic supervision signals  we  rely on dense shape-level supervision.
+Current algorithms for landmark localization and human pose estimation commonly address the learning problem in the form of a multi-class classification task, where each landmark defines its own class and the remainder of the image is labelled as background. Even though simple and effective, this training strategy provides a particularly sparse positive supervision signal, which asks a CNN to call everything other than a particular landmark a negative. We can intuitively say that our method simplifies this training `riddle', by providing information about dense correspondence between two surfaces. This fits  with the `Privileged Information' paradigm of ~\cite{VapnikV09} where an `Intelligent Teacher' provides additional information during training that helps `understand' why a given  decision is taken. As a simple example, classifying a pixel as being a `knee' landmark can potentially be assisted by having dense correspondence maps, that  help the network solve the problem in a coarse-to-fine manner. Rather than rely on semantic supervision signals  we  rely on dense shape-level supervision.
     
 Hence, motivated from the above we propose end-to-end trainable cascaded architectures which estimate dense correspondences and then these are used to improve articulated pose estimation. The architecture, coined DenseReg cascade, is depicted in Fig.~\ref{fig:cascadeBody}. In this particular, architecture the first network (which is in a form of hourglass) is used for dense shape regression. The output of the dense shape regression network is passed as privileged information in the second network which performs articulated body/face pose estimation. 
 
@@ -546,7 +547,7 @@ Due to space constraints, we refer to the supplementary material for additional 
 \subsection{Training Setup}
 \label{sec:training_setup}
 
-\textbf{Training Databases for Faces.} We train our system using the 3DDFA data of \cite{zhu2016face}. The 3DDFA data provides projection and 3DMM model parameters for the Basel \cite{paysan20093d} + FaceWarehouse \cite{cao2014facewarehouse} model for each image of the 300W database. We use the topology defined by this model to define our UV space and rasterize the images to obtain per-pixel ground truth UV coordinates.  Our training set consists of the LFPW trainset, Helen trainset and AFW, thus 3148 images
+\textbf{Training Databases for Faces.} We train our system using the 3DDFA data of~\cite{zhu2016face}. The 3DDFA data provides projection and 3DMM model parameters for the Basel~\cite{paysan20093d} + FaceWarehouse~\cite{cao2014facewarehouse} model for each image of the 300W database. We use the topology defined by this model to define our UV space and rasterize the images to obtain per-pixel ground truth UV coordinates.  Our training set consists of the LFPW trainset, Helen trainset and AFW, thus 3148 images
 that are captured under completely unconstrained conditions
 and exhibit large variations in pose, expression, illumination,
 age, etc.
@@ -556,17 +557,17 @@ age, etc.
  
  In order to create the supervisor UV signals for the body we made use of the recently proposed \textit{Unite the People} (UP)~\cite{lassner2017unite} dataset. The data is formed by automatically fitting the SMPL 3D model~\cite{loper2015smpl} (which has components that describe both the shape and the articulation of the human body in dense 3D). 
  %
- For our experiments on human pose estimation with the cascaded architecture, in order to have a dense supervisory signal for all of the MPII and LSP images, we used the code provided by \cite{lassner2017unite}, to fit the SMPL model by minimizing the energy function proposed in ~\cite{bogo2016keep}. Even though some fits are erroneous, which are filtered in the UP dataset, the incorporation of dense correspondences yield improved pose estimation results. We used the estimated 3D shape and camera parameters to render a pixel-vertex correspondence map, where each image pixel is labeled with the corresponding vertex index and compute the corresponding UV maps. 
+ For our experiments on human pose estimation with the cascaded architecture, in order to have a dense supervisory signal for all of the MPII and LSP images, we used the code provided by~\cite{lassner2017unite}, to fit the SMPL model by minimizing the energy function proposed in ~\cite{bogo2016keep}. Even though some fits are erroneous, which are filtered in the UP dataset, the incorporation of dense correspondences yield improved pose estimation results. We used the estimated 3D shape and camera parameters to render a pixel-vertex correspondence map, where each image pixel is labeled with the corresponding vertex index and compute the corresponding UV maps. 
  
- The pose estimation experiments were performed on two well known body pose databases: MPII Human Pose \cite{andriluka20142d} and Leeds Sport Poses (LSP) + extended training set \cite{Johnson10}. There are around 18k training images and 7k testing images involved in MPII. We split training set randomly to make a 3k size validation set while the rest are used for training. Results on LSP are reported by fine tuning the same model with the 11k extended LSP training set.
+ The pose estimation experiments were performed on two well known body pose databases: MPII Human Pose~\cite{andriluka20142d} and Leeds Sport Poses (LSP) + extended training set~\cite{Johnson10}. There are around 18k training images and 7k testing images involved in MPII. We split training set randomly to make a 3k size validation set while the rest are used for training. Results on LSP are reported by fine tuning the same model with the 11k extended LSP training set.
 
 \textbf{CNN Training for DenseReg} 
 
-We have used two different network architectures for our experiments. In particular, in order to be directly comparable to the DeepLab-v2 network in semantic segmentation experiments we first used a ResNet101~\cite{He2015} architecture with dilated convolutions ( atrous )~\cite{CP2015Semantic,mallat1999wavelet}, such that the stride of the CNN is $8$ and (b) an Hourglass-type network \cite{newell2016stacked}. We use bilinear interpolation to upscale both the $\hat{q}$ and $\hat{r}$ branches before the losses. The losses are applied at the input image scale and back-propagated through interpolation. We apply a weight to the smooth $L1$ loss layers to balance their contribution. In our experiments, we have used a weight of $40$ for quantized~($d=0.1$) and a weight of $70$ for non-quantized regression, which are determined by a coarse cross validation. 
+We have used two different network architectures for our experiments. In particular, in order to be directly comparable to the DeepLab-v2 network in semantic segmentation experiments we first used a ResNet101~\cite{He2015} architecture with dilated convolutions ( atrous )~\cite{CP2015Semantic,mallat1999wavelet}, such that the stride of the CNN is $8$ and (b) an Hourglass-type network~\cite{newell2016stacked}. We use bilinear interpolation to upscale both the $\hat{q}$ and $\hat{r}$ branches before the losses. The losses are applied at the input image scale and back-propagated through interpolation. We apply a weight to the smooth $L1$ loss layers to balance their contribution. In our experiments, we have used a weight of $40$ for quantized~($d=0.1$) and a weight of $70$ for non-quantized regression, which are determined by a coarse cross validation. 
 
 For the ResNet based network, we use an initialization with a network pre-trained for the MS COCO segmentation task~\cite{lin2014microsoft}. The new layers are initialized with random weights drawn from Gaussian distributions. Large weights of the regression losses can be problematic at initialization even with moderate learning rates. To cope with this, we use initial training with a lower learning rate for a \textit{warm start} for a few iterations. We then use a base learning rate of $0.001$ with a polynomial decay policy for $20k$ iterations with a batch size of $10$ images.
 
-For the hourglass architecture, we adopt \cite{newell2016stacked} with inception-v2 module (a Figure describing the network can be found in the Appendix). Each deconvolution layer involved is using a dilated convolution following by a $3\times 3$ convolution layer with stride 1 and same output channels as input channels. 
+For the hourglass architecture, we adopt~\cite{newell2016stacked} with inception-v2 module (a Figure describing the network can be found in the Appendix). Each deconvolution layer involved is using a dilated convolution following by a $3\times 3$ convolution layer with stride 1 and same output channels as input channels. 
 
 
 \textbf{CNN Training for DenseReg Cascade} 
@@ -863,9 +864,9 @@ Table~\ref{tab:300vw} reports the AUC and Failure Rate measures. DenseReg + Casc
 \hline
 % Chu et al., CVPR'17           & 98.5  & 96.3  & 91.9  & 88.1  & 90.6  & 88.0 & 85.0 & 91.5 & 63.8 \\
 \cite{newell2016stacked}       & 98.2  & 96.3  & 91.2  & 87.1  & \textbf{90.1}  & 87.4 & 83.6 & 90.9 & \textbf{62.9} \\
- \cite{bulat2016human} & 97.9  & 95.1  & 89.9  & 85.3  & 89.4  & 85.7 & 81.7 & 89.7 & 59.6 \\
- \cite{wei2016convolutional}          & 97.8  & 95.0  & 88.7  & 84.0  & 88.4  & 82.8 & 79.4 & 88.5 & 61.4 \\
- \cite{pishchulin16cvpr}   & 94.1  & 90.2  & 83.4  & 77.3  & 82.6  & 75.7 & 68.6 & 82.4 & 56.5 \\
+~\cite{bulat2016human} & 97.9  & 95.1  & 89.9  & 85.3  & 89.4  & 85.7 & 81.7 & 89.7 & 59.6 \\
+~\cite{wei2016convolutional}          & 97.8  & 95.0  & 88.7  & 84.0  & 88.4  & 82.8 & 79.4 & 88.5 & 61.4 \\
+~\cite{pishchulin16cvpr}   & 94.1  & 90.2  & 83.4  & 77.3  & 82.6  & 75.7 & 68.6 & 82.4 & 56.5 \\
 \hline
 DenseReg Cascade & \textbf{98.5}  & \textbf{96.4}  & \textbf{92.1}  & \textbf{88.2}  & 89.4  & \textbf{88.6} & \textbf{85.6} & \textbf{91.6} & 62.8 \\
 \hline
@@ -882,10 +883,10 @@ DenseReg Cascade & \textbf{98.5}  & \textbf{96.4}  & \textbf{92.1}  & \textbf{88
 \hline
 \textbf{Methods} &\textbf{Head}   & \textbf{Shoulder} & \textbf{Elbow} & \textbf{Wrist} & \textbf{Hip}   & \textbf{Knee} & \textbf{Ankle} & \textbf{Total} & \textbf{AUC} \\
 \hline\hline
- \cite{pishchulin2013poselet} & 87.2  & 56.7  & 46.7  & 38.0  & 61.0  & 57.5 & 52.7 & 57.1 & 35.8\\
- \cite{wei2016convolutional} & \textbf{97.8}  & 92.5  & 87.0  & 83.9  & 91.5  & 90.8 & 89.9 & 90.5 & 65.4\\
- \cite{bulat2016human}& 97.2  & 92.1  & 88.1  & 85.2  & \textbf{92.2}  & 91.4 & 88.7 & 90.7 & 63.4\\
- \cite{insafutdinov16ariv}& 97.4  & 92.7  & 87.5  & 84.4  & 91.5  & 89.9 & 87.2 & 90.1 & \textbf{66.1}\\
+~\cite{pishchulin2013poselet} & 87.2  & 56.7  & 46.7  & 38.0  & 61.0  & 57.5 & 52.7 & 57.1 & 35.8\\
+~\cite{wei2016convolutional} & \textbf{97.8}  & 92.5  & 87.0  & 83.9  & 91.5  & 90.8 & 89.9 & 90.5 & 65.4\\
+~\cite{bulat2016human}& 97.2  & 92.1  & 88.1  & 85.2  & \textbf{92.2}  & 91.4 & 88.7 & 90.7 & 63.4\\
+~\cite{insafutdinov16ariv}& 97.4  & 92.7  & 87.5  & 84.4  & 91.5  & 89.9 & 87.2 & 90.1 & \textbf{66.1}\\
 \hline
 %HG+IUV &93.7  & 92.0  & 87.2  & 85.2  & 90.5  & 91.1 & 89.3 & 89.9 & 63.0\\
 DenseReg Cascade& 94.7  & \textbf{93.4}  & \textbf{90.2}  & \textbf{88.2}  & 91.8  & \textbf{92.9} & \textbf{91.6} & \textbf{91.8} & 65.6\\
@@ -974,7 +975,7 @@ Furthermore, we unify the problems of dense shape regression and articulated pos
 
 \section{Network Structure for Hourglass-type DenseReg}
 
-Figure\ref{fig:hourglass_arch} demonstrated the hourglass architecture \cite{newell2016stacked} we used with some modifications. The network is consisted by three type of modules: 1) the convolution module (blue), 2) the down sampling module (read) and 3) the up sampling module. The whole hourglass is constructed with a list convolution modules at 4 different scales with corresponding down/up sampling modules between those convolution modules. There are also bilateral connection between layers of the same scale. The composition of each type of modules are shown in the figure too. The down sampling module is just a $3\times3$ max pooling layer and the up sampling module is using a $3\times3$ atrous layer following by a $3\times3$ convolution layer. The majority of the parameters are lies in the convolution module. The original hourglass uses a chain of 3 convolution layers as its convolution module, while replacing that with the inception-v2 type module shows slight improvement on body pose estimation and obvious improvement on training speed.
+Figure\ref{fig:hourglass_arch} demonstrated the hourglass architecture~\cite{newell2016stacked} we used with some modifications. The network is consisted by three type of modules: 1) the convolution module (blue), 2) the down sampling module (read) and 3) the up sampling module. The whole hourglass is constructed with a list convolution modules at 4 different scales with corresponding down/up sampling modules between those convolution modules. There are also bilateral connection between layers of the same scale. The composition of each type of modules are shown in the figure too. The down sampling module is just a $3\times3$ max pooling layer and the up sampling module is using a $3\times3$ atrous layer following by a $3\times3$ convolution layer. The majority of the parameters are lies in the convolution module. The original hourglass uses a chain of 3 convolution layers as its convolution module, while replacing that with the inception-v2 type module shows slight improvement on body pose estimation and obvious improvement on training speed.
 
 \begin{figure}[ht]
 \centering

@@ -7,6 +7,7 @@
 
 \linespread{1.5}
 \def\submitdate#1{\gdef\@submitdate{#1}}
+\def\supervisor#1{\gdef\@supervisor{#1}}
 
 \def\maketitle{
   \begin{titlepage}{
@@ -23,7 +24,10 @@
   \vskip 0.3in
   \par
   {\Large \@author}
-  \vskip 4in
+  \vskip 3in
+  {\Large Supervised by \@supervisor}
+  \vskip 1in
+  
   \par
   Submitted in part fulfilment of the requirements for the degree of 
   \linebreak
@@ -58,6 +62,7 @@
   %\def\baselinestretch{1.5}
   \linespread{1.5}
   \normalsize
+  \setcounter{page}{1}
 }
 \def\endabstract{
   \par
@@ -90,7 +95,7 @@
 }
 
 \def\preface{
-    \pagenumbering{roman}
+    \pagenumbering{arabic}
     \pagestyle{plain}
     \doublespacing
 }
@@ -110,7 +115,6 @@
     \pagestyle{plain}
     \cleardoublepage
     \pagestyle{uheadings}
-    \pagenumbering{arabic}
     \doublespacing
 }
 

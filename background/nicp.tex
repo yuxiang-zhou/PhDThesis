@@ -29,7 +29,7 @@ where $E_d(X)$ is distance penalty term, $E_s(X)$ is stiffness penalty term and 
 \subsubsection{Distance Penalty Term}
 \label{sec:nicpdt}
 
-Distance between $S$ and $T$ are defined using Euclidean Distance. The distance penalty term and corresponding matrix form is defined as \cite{Amberg2007}:
+Distance between $S$ and $T$ are defined using Euclidean Distance. The distance penalty term and corresponding matrix form is defined as~\cite{Amberg2007}:
 
 \begin{align}
 \label{eq:nicpdt}
@@ -63,7 +63,7 @@ E_d(X) = ||W(DX-U)||^2_F
 \subsubsection{Stiffness Penalty Term}
 \label{sec:nicpst}
 
-Stiffness term is introduced to have constrain on deformation. In other word, stiffness maintains the neighbouring  correlation for each vertex. A significant deformation of one vertex can cause remarkable penalty on neighbouring vertices. Therefore source mesh cannot deform completely freely but with regularisation. The matrix form of stiffness penalty cost function defined as \cite{Amberg2007}:
+Stiffness term is introduced to have constrain on deformation. In other word, stiffness maintains the neighbouring  correlation for each vertex. A significant deformation of one vertex can cause remarkable penalty on neighbouring vertices. Therefore source mesh cannot deform completely freely but with regularisation. The matrix form of stiffness penalty cost function defined as~\cite{Amberg2007}:
 \begin{equation}
 E_s(X)=||(M \otimes G)X||^2_F
 \end{equation}
@@ -72,7 +72,7 @@ where $M$ expresses the connectivity of vertices with $m \times n$ that each row
 \subsubsection{Landmark Penalty Term}
 \label{sec:nicplt}
 
-Landmark penalty term functioning similar as distance term. It can be assumed as a sparse version of distance term with exact landmark correspondence instead of looking up for closest points. Formal definition are \cite{Amberg2007}:
+Landmark penalty term functioning similar as distance term. It can be assumed as a sparse version of distance term with exact landmark correspondence instead of looking up for closest points. Formal definition are~\cite{Amberg2007}:
 \begin{equation}
 E_l(X)=||D_LX-U_L||^2_F
 \end{equation}
@@ -102,7 +102,7 @@ where $X$ can be solved directly by setting the derivative of $E(X)$ to zero. So
 \label{eq:nicpx}
 X=(A^TA)^{-1}A^TB
 \end{equation}
-which simply is the product of pseudo-inverse of matrix $A$ and matrix $B$. Therefore in each step, the deformation can be found directly for fixed $\alpha$ and $\beta$. Since landmark term is optional, the final algorithm considers only varying stiffness weighting. Pseudo code are shown below \cite{Amberg2007}:
+which simply is the product of pseudo-inverse of matrix $A$ and matrix $B$. Therefore in each step, the deformation can be found directly for fixed $\alpha$ and $\beta$. Since landmark term is optional, the final algorithm considers only varying stiffness weighting. Pseudo code are shown below~\cite{Amberg2007}:
 \begin{algorithm}[ht]
 \caption{Non-rigid Iterative Closest Point Algorithm}
 \label{alg:nicp}
@@ -116,4 +116,4 @@ Initialise $X^0$ as identical transformation\;
 Return $X$\;
 \end{algorithm}
 
-As Nonrigid ICP declared that it preserved convergence feature from ICP so the algorithm \ref{alg:nicp} also gauranteed termination. Detailed discussion convergence preservation can be found in \cite{Amberg2007}.
+As Nonrigid ICP declared that it preserved convergence feature from ICP so the algorithm \ref{alg:nicp} also gauranteed termination. Detailed discussion convergence preservation can be found in~\cite{Amberg2007}.
