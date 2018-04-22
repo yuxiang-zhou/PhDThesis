@@ -1,21 +1,7 @@
 \chapter{Dense Deformable Models for Ears ``in-the-wild''}
 \minitoc
 
-\section{Datasets}
-
-\section{Deformable Models for Ears}
-
-\section{Recognition}
-
-\section{Verification}
-
-\section{3D Morphable Models for Ears}
-
-
-
-    
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{INTRODUCTION}
+\section{Introduction}
 
 Ears have been discovered to have  biometric importance for identifying people and/or verifying their identity. This is largely because of their complex inner shape structure, which is not only unique but also long-lasting regardless of ageing. In this paper, we make two important contributions relevant to analysis of ear in imagery captured in unconstrained conditions. That is, we present (a) the first, to the best of our knowledge, annotated database with ear landmarks and use it in order to build statistical deformable ear models in-the-wild and (b) a database of 2058 labelled unconstrained ear images with 231 subjects and use it for ear recognition/verification. We perform extensive comparisons for ear alignment using many state-of-the-art techniques and extensive experiments. Finally, we conducted extensive experiments for ear recognition using both handcrafted, as well as learned features (i.e., using deep learning). All annotated data and code will be publicly available. 
 
@@ -111,7 +97,6 @@ We collected two sets of ear images ``in-the-wild''\footnote{\label{foot:annotat
     \caption{Example of the annotated 55 landmarks on ears. Ascending helix (0-3), descending helix (4-7), helix (8-13), ear lobe (14-19), ascending inner helix (20-24), descending inner helix (25-28), inner helix (29-34), tragus (35-38), canal (39), antitragus (40-42), concha (43-46), inferio crus (47-49) and supperio crus (50-54).}
     \label{fig:db_example}
 \end{figure}
-
 
 \textbf{Collection A} consists of 605 ear images ``in-the-wild'' collected from Google Images with no specific identity (by searching using the ear related tags). Each is manually annotated with 55 landmark points. Examples of such annotated images and the anatomy of pinna is shown in figure~\ref{fig:db_example}. The semantic meaning of the 55 landmarks are: ascending helix (0-3), descending helix (4-7), helix (8-13), ear lobe (14-19), ascending inner helix (20-24), descending inner helix (25-28), inner helix (29-34), tragus (35-38), canal (39), antitragus (40-42), concha (43-46), inferio crus (47-49) and supperio crus (50-54). We randomly split the images into two disjoint sets for training (500) and testing (105). The purpose of Collection A is to build statistical deformable models with unconstrained ear samples.
 
@@ -526,7 +511,8 @@ Overall performance over five folds is reported using mean accuracy (as in LFW).
 
 %Table~\ref{tab:ear_verification_benchmark} and figure~\ref{fig:ear_benchmark} reported baseline of ear verification on our database. In general, ear verification with AAM frontalisation gives better performance. The methods reported highest verification accuracy (around 69\%) are LDA trained on DCNN feature with $\ell_2^2$ norm.
 
-
+\section{3D Morphable Models for Ears}
+TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
