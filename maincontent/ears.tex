@@ -9,7 +9,7 @@ Given the increasing focus on automatic identity verification during the last de
 
 The complex interior shape of ears has long been considered as a valuable identification metric. The first time it was utilised for human verification was hundreds years ago~\cite{bertillon1890photographie}. Several years later, researchers demonstrated that 500 ears can be distinguished using only four features~\cite{imhofer1906bedeutung}. The work of~\cite{iannarelli1989ear} also showed that 10k ears can be determined with 12 features. Furthermore, ear can be in many cases combined with face for improved person recognition and verification ~\cite{chang2003comparison}.
 
-As in many biometrics, such as face~\cite{taigman2014deepface}, the first step towards  recognition/verification is, arguably, alignment. Since, ear is a deformable object a statistical deformable model should be learned. In order to learn the first statistical deformable model of the ear we collected and annotated, with regards to 55 landmarks, the first ``in-the-wild'' ear database. Furthermore, we conducted an extensive experimental comparison for ear landmark localisation using state-of-the-art generative and discriminative methodologies  for training and fitting statistical deformable models~\cite{Cootes1995, Cootes2001, Matthews2004, Saragih2011, Belhumeur2011, Zhu2012,Cao2012, Asthana2013, Tzimiropoulos2014, Asthana2014, antonakos2015feature}. Figure \ref{fig:aam_model} visualises the mean and the first variations along the 5 principal components of the texture and the shape (as performed in Active Appearance Model~\cite{Cootes2001, Matthews2004, Tzimiropoulos2014, antonakos2015feature}).  
+As in many biometrics, such as face~\cite{taigman2014deepface}, the first step towards recognition/verification is, arguably, alignment. Since, ear is a deformable object a statistical deformable model should be learned. In order to learn the first statistical deformable model of the ear we collected and annotated, with regards to 55 landmarks, the first ``in-the-wild'' ear database. Furthermore, we conducted an extensive experimental comparison for ear landmark localisation using state-of-the-art generative and discriminative methodologies  for training and fitting statistical deformable models~\cite{Cootes1995, Cootes2001, Matthews2004, Saragih2011, Belhumeur2011, Zhu2012,Cao2012, Asthana2013, Tzimiropoulos2014, Asthana2014, antonakos2015feature}. Figure \ref{fig:aam_model} visualises the mean and the first variations along the 5 principal components of the texture and the shape (as performed in Active Appearance Model~\cite{Cootes2001, Matthews2004, Tzimiropoulos2014, antonakos2015feature}).  
 
 \begin{figure}[t!]
     \includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/models/AAM_model}
@@ -65,9 +65,9 @@ To the best of our knowledge the only ear database that has been collected ``in-
 \label{label:ear_db}
 We collected two sets of ear images ``in-the-wild''\footnote{\label{foot:annotations_ear}Both Collection A and B are publicly available in http://www.ibug.doc.ic.ac.uk/resources/ibug-ears.}. The first was used for  statistical deformable model construction, while the latter was used for ear verification and recognition ``in-the-wild''.
 
-\begin{figure}[!b]
+\begin{figure}
     \centering
-    \includegraphics[width=0.9\columnwidth]{resources/Ear_Deformable_Model/pinna} \\
+    \includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/pinna} \\
     \newcommand{\flowh}{0.22\columnwidth}
     % \newcommand{\flowhh}{0.2\columnwidth}
     \newcommand{\flowhhh}{0.21\columnwidth}
@@ -171,56 +171,80 @@ where Jacobian term is defined as:
 \bm{J}|_{\bm{p}=\bm{0}}=\nabla(\bm{\bar{a}}+\bm{U_A}\bm{\lambda})\frac{\partial \mathcal{W}}{\partial \bm{p}}|_{\bm{p}=\bm{0}}
 \end{equation}
 
-
-
-
-\begin{figure}[!t]
+\begin{figure}
     \centering
-    \newcommand{\flowh}{0.285\columnwidth}
+    \newcommand{\flowh}{0.275\columnwidth}
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0000}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0001}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0011}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0003}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0004}
-    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0005}
-    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0006}
-    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0007}
-    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0008}
-    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0028}
-    \\
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0000}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0001}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0011}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0003}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0004}
+    \\
+    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0005}
+    \hfill
+    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0006}
+    \hfill
+    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0007}
+    \hfill
+    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0008}
+    \hfill
+    \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/initial_0028}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0005}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0006}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0007}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0008}
+    \hfill
     \includegraphics[height=\flowh]{resources/Ear_Deformable_Model/fittings/final_0028}
     \\
-    \newcommand{\flowhh}{0.265\columnwidth}
+    \newcommand{\flowhh}{0.255\columnwidth}
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0012}
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0022}
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0023}
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0015}
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0024}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0025}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0010}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0027}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0020}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0026}
-    \\
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0012}
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0022}
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0023}
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0015}
+    \hfill
     \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0024}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0025}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0010}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0027}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0020}
-    \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0026}
+    % \\
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0025}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0010}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0027}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0020}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/initial_0026}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0025}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0010}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0027}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0020}
+    % \includegraphics[height=\flowhh]{resources/Ear_Deformable_Model/fittings/final_0026}
     
     \caption{Visualisation of Holistic AAM ear fitting results (cropped to ear only for better visualisation). First row demonstrates the bounding box generated from our in-house ear detector with corresponding initialisation. Second row presented the final fitting using Holistic AAM. Figure best viewed by zooming in.}
     \label{fig:fitting_visualise}
@@ -269,7 +293,7 @@ We have conducted two set of extensive experiments. The first set of experiments
 
 % ----------------------------------------------------------------------------------------------------------------
 
-\begin{figure}[!t]
+\begin{figure}
 \centering
 \newcommand{\flowh}{0.29\columnwidth}
     \centering
@@ -293,7 +317,7 @@ We evaluated the performance of many state-of-the-art methodologies including AA
 For all the tested methods we computed the Cumulative Error Distribution (CED) curves which is the standard way of visualising the performance of deformable models. The fitting error is computed using the point-to-point error normalised by the diagonal of the ear's bounding box that tightly bounded ground truth annotations, as proposed in~\cite{Zhu2012}.
 
 
-\begin{figure}[t!]
+\begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/benchmark_ear_legend} \\
     \includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/benchmark_ear}
@@ -301,7 +325,7 @@ For all the tested methods we computed the Cumulative Error Distribution (CED) c
     \label{fig:fitting_results}
 \end{figure}
 
-\begin{table}[t!]
+\begin{table}
 \small
 \centering
 \begin{tabular}{|l|c|c|c|}
@@ -342,7 +366,7 @@ Table \ref{tab:ear_stats} complements Figure~\ref{fig:fitting_results} by report
 
 
 
-\begin{figure}[!t]
+\begin{figure}
     \centering
     \newcommand{\flowhh}{0.36\columnwidth}
     \newcommand{\flowh}{0.32\columnwidth}
@@ -360,7 +384,7 @@ Table \ref{tab:ear_stats} complements Figure~\ref{fig:fitting_results} by report
 \end{figure}
 
 
-\begin{table}[!t]
+\begin{table}
 \centering
 \begin{tabular}{|l|c|c|}
 \hline
@@ -412,20 +436,20 @@ From the results reported in Table \ref{tab:ear_recognition} we can deduce the f
 
 % ----------------------------------------------------------------------------------------------------------------
 \afterpage{
-    \begin{figure}[t!]
+    \begin{figure}
     \centering
     % \newcommand{\floww}{0.49\columnwidth}
     \includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_label}
     \\
-    \includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_aligned}
-    \\\includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_unaligned}
+    \includegraphics[width=0.8\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_aligned}
+    \\\includegraphics[width=0.8\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_unaligned}
     \caption{ROC curves averaged over 5 folds on the proposed database (top: using aligned images, bottom: using unaligned images).}
     \label{fig:ear_benchmark}
     \end{figure}
     
-    \begin{table}[ht]
+    \begin{table}
     \centering
-    \scriptsize
+    
     \begin{tabular}{|l|c|c|}
     \hline
     
@@ -513,6 +537,7 @@ Overall performance over five folds is reported using mean accuracy (as in LFW).
 
 \section{3D Morphable Models for Ears}
 TODO
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
