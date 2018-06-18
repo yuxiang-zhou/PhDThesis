@@ -11,7 +11,7 @@ The complex interior shape of ears has long been considered as a valuable identi
 
 As in many biometrics, such as face~\cite{taigman2014deepface}, the first step towards recognition/verification is, arguably, alignment. Since, ear is a deformable object a statistical deformable model should be learned. In order to learn the first statistical deformable model of the ear we collected and annotated, with regards to 55 landmarks, the first ``in-the-wild'' ear database. Furthermore, we conducted an extensive experimental comparison for ear landmark localisation using state-of-the-art generative and discriminative methodologies  for training and fitting statistical deformable models~\cite{Cootes1995, Cootes2001, Matthews2004, Saragih2011, Belhumeur2011, Zhu2012,Cao2012, Asthana2013, Tzimiropoulos2014, Asthana2014, antonakos2015feature}. Figure \ref{fig:aam_model} visualises the mean and the first variations along the 5 principal components of the texture and the shape (as performed in Active Appearance Model~\cite{Cootes2001, Matthews2004, Tzimiropoulos2014, antonakos2015feature}).  
 
-\begin{figure}[t!]
+\begin{figure}
     \includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/models/AAM_model}
     \caption{Exemplar statistical shape and appearance model of human ear. The figure visualises the first five principal components variation in both models. Appearance model is created with pixel intensity for better visualisation.}
     \label{fig:aam_model}
@@ -280,6 +280,9 @@ The difference between a holistic and a patch-based AAM~\cite{Tzimiropoulos2014}
 
 Patch-based AAMs achieve more accurate performance compared to holistic AAMs on the task of face alignment~\cite{Tzimiropoulos2014}. However, this is easily explained by the fact that the inner appearance information of a human face (i.e. cheeks eta.) does not have a distinctive structure. Experiment \ref{sec:ear_benchmark_fitting} further explains the advanced performance of holistic AAM on ears where inner appearance is complex and rich. In general, the selection of a holistic or patch-based appearance representation highly depends on the nature of the modelled object and its interior structure. 
 
+\subsection{Dense Active Appearance Model}
+TODO
+
 
 
 
@@ -358,8 +361,6 @@ Figure~\ref{fig:fitting_results} reports the CED curves of all the tested method
 
 
 Table \ref{tab:ear_stats} complements Figure~\ref{fig:fitting_results} by reporting some statistical metrics, i.e. the mean, median and standard deviation of the errors. Finally, Figure~\ref{fig:fitting_visualise} shows some qualitative fitting results along with their initialisations.
-
-
 
 
 % ----------------------------------------------------------------------------------------------------------------
@@ -441,8 +442,9 @@ From the results reported in Table \ref{tab:ear_recognition} we can deduce the f
     % \newcommand{\floww}{0.49\columnwidth}
     \includegraphics[width=\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_label}
     \\
-    \includegraphics[width=0.8\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_aligned}
-    \\\includegraphics[width=0.8\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_unaligned}
+    \includegraphics[width=0.45\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_aligned}
+    \hfill
+    \includegraphics[width=0.45\columnwidth]{resources/Ear_Deformable_Model/verification/verification_bench_unaligned}
     \caption{ROC curves averaged over 5 folds on the proposed database (top: using aligned images, bottom: using unaligned images).}
     \label{fig:ear_benchmark}
     \end{figure}
@@ -534,6 +536,57 @@ Overall performance over five folds is reported using mean accuracy (as in LFW).
 %In the case of between database verification, for each validation fold, test set are swapped so algorithm are trained on training set from one database but tested on the test set of the other. Here we focus on the performance difference for the same method trained on one training set but tested on different test sets, which refers to $A_d-A_c$ and $B_c-B_d$ on both database. As the results shown, models trained on $A$ are not general enough to cope with the test set from $B$ according to high $A_d-A_c$ value, which is around 8\% difference. In contrast, the same model trained on B is more robust against testing data from A and, in most case, reported verification accuracy improvement subjects to $B_c-B_d$ value and marginal performance reduction in worst cases. 
 
 %Table~\ref{tab:ear_verification_benchmark} and figure~\ref{fig:ear_benchmark} reported baseline of ear verification on our database. In general, ear verification with AAM frontalisation gives better performance. The methods reported highest verification accuracy (around 69\%) are LDA trained on DCNN feature with $\ell_2^2$ norm.
+
+
+\subsection{Dense Ear Landmark Regression}
+\label{sec:exp_ear}
+
+We have also performed experiments on the human ear. We employ the $605$ images and sparse landmark annotations that were generated in a semi-supervised manner by Zhou et al.~\cite{Zhou_2016_CVPR}. Due to the lack of a 3D model of the human ear, we apply Thin Plate Splines to bring the images into dense correspondence and obtain the deformation-free space. We perform landmark localization following the same procedure as in Sec.~\ref{sec:exp_landmark_localization}.
+We split the images in $500$ for training and $105$ for testing.  
+
+
+Given the lack of state-of-the-art deformable models on human ear, we compare DenseReg with DenseReg+AAM and DenseReg+MDM.  We also trained a DPM detector in order to compare the initialization quality with DenseReg. Figure~\ref{fig:ears} reports the CED curves based on the 55 landmark points using the RMS point-to-point error normalized by the bounding box average edge length. On Table.\ref{tab:ears}, we provide failure rate and the Area Under Curve(AUC) measures. Once again, the results are highly accurate even without improving DenseReg with a deformable model. We observe that DenseReg results are highly accurate and clearly outperforms the DPM based alternative even without a deformable model. Examples for dense human ear correspondence estimated by our system  are presented in Fig.~\ref{fig:ears_examples}.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{resources/Ear_Deformable_Model/dense/ears3.pdf}
+\caption{Exemplar pairs of deformation-free coordinates of dense landmarks on human ear.}
+\vspace{-0.5cm}
+\label{fig:ears_examples}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{resources/Ear_Deformable_Model/dense/ear_legend.pdf}
+\includegraphics[width=\linewidth]{resources/Ear_Deformable_Model/dense/ear_results.pdf}
+\caption{Landmark localization results on human ear using 55 points. Accuracy is reported as Cumulative Error Distribution of normalized RMS point-to-point error.}
+\vspace{-0.25cm}
+\label{fig:ears}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \FloatBarrier
+\begin{table}
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\emph{Method} & \emph{AUC} & \emph{Failure Rate (\%)}\\
+\hline\hline
+\textbf{DenseReg + MDM} & \textbf{0.4842} & \textbf{0.98} \\
+DenseReg       &  0.4150 &   1.96 \\
+DenseReg + AAM &  0.4263 &  0.98 \\
+DPM + MDM      &  0.4160 &  15.69 \\
+DPM + AAM      &  0.3283 &  22.55 \\
+\hline
+\end{tabular}
+\caption{Landmark localization results on human ear using 55 points. Accuracy is reported as the Area Under the Curve (AUC) and the Failure Rate of the Cumulative Error Distribution of the normalized RMS point-to-point error.}
+\label{tab:ears}
+\end{table}
+
+
 
 \section{3D Morphable Models for Ears}
 TODO
