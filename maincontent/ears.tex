@@ -283,7 +283,8 @@ Patch-based AAMs achieve more accurate performance compared to holistic AAMs on 
 \subsection{Dense Active Appearance Model}
 TODO
 
-
+\section{3D Morphable Models for Ears}
+TODO
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -541,6 +542,8 @@ Overall performance over five folds is reported using mean accuracy (as in LFW).
 \subsection{Dense Ear Landmark Regression}
 \label{sec:exp_ear}
 
+TODO: link to next chapter
+
 We have also performed experiments on the human ear. We employ the $605$ images and sparse landmark annotations that were generated in a semi-supervised manner by Zhou et al.~\cite{Zhou_2016_CVPR}. Due to the lack of a 3D model of the human ear, we apply Thin Plate Splines to bring the images into dense correspondence and obtain the deformation-free space. We perform landmark localization following the same procedure as in Sec.~\ref{sec:exp_landmark_localization}.
 We split the images in $500$ for training and $105$ for testing.  
 
@@ -585,11 +588,6 @@ DPM + AAM      &  0.3283 &  22.55 \\
 \caption{Landmark localization results on human ear using 55 points. Accuracy is reported as the Area Under the Curve (AUC) and the Failure Rate of the Cumulative Error Distribution of the normalized RMS point-to-point error.}
 \label{tab:ears}
 \end{table}
-
-
-
-\section{3D Morphable Models for Ears}
-TODO
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
